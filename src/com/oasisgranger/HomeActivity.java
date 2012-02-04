@@ -1,5 +1,7 @@
 
-package com.oasis;
+package com.oasisgranger;
+
+import com.oasis.R;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
