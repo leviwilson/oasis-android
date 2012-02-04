@@ -370,9 +370,10 @@ containing a value of this type.
         public static final int abs__tab_icon=0x7f040013;
         public static final int abs__textButton=0x7f040019;
         public static final int abs__up=0x7f040010;
+        public static final int fragment_dashboard=0x7f04001d;
         public static final int homeAsUp=0x7f040006;
+        public static final int home_btn_schedule=0x7f04001e;
         public static final int listMode=0x7f040002;
-        public static final int list_view=0x7f04001d;
         public static final int normal=0x7f040001;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
@@ -396,7 +397,8 @@ containing a value of this type.
         public static final int abs__screen_action_bar_overlay=0x7f030008;
         public static final int abs__screen_simple=0x7f030009;
         public static final int abs__simple_spinner_item=0x7f03000a;
-        public static final int splash=0x7f03000b;
+        public static final int activity_home=0x7f03000b;
+        public static final int fragment_dashboard=0x7f03000c;
     }
     public static final class string {
         public static final int abs__tab_under_ab_tag=0x7f080000;
@@ -404,9 +406,10 @@ containing a value of this type.
         public static final int hello=0x7f080001;
     }
     public static final class style {
+        public static final int DashboardButton=0x7f0a001f;
         public static final int Internal_Widget_Sherlock_ActionBar=0x7f0a001c;
         public static final int Internal_Widget_Sherlock_Light_ActionBar=0x7f0a001d;
-        public static final int OasisTheme=0x7f0a001f;
+        public static final int OasisTheme=0x7f0a0020;
         public static final int TextAppearance_Widget_Subtitle=0x7f0a001b;
         public static final int TextAppearance_Widget_Title=0x7f0a001a;
         public static final int Theme_Sherlock=0x7f0a0000;
