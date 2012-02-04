@@ -406,6 +406,7 @@ containing a value of this type.
     public static final class style {
         public static final int Internal_Widget_Sherlock_ActionBar=0x7f0a001c;
         public static final int Internal_Widget_Sherlock_Light_ActionBar=0x7f0a001d;
+        public static final int OasisTheme=0x7f0a001f;
         public static final int TextAppearance_Widget_Subtitle=0x7f0a001b;
         public static final int TextAppearance_Widget_Title=0x7f0a001a;
         public static final int Theme_Sherlock=0x7f0a0000;
