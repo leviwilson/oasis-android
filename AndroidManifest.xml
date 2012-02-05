@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/oasis_logo"
         android:name=".OasisGrangerApplication"
         android:label="@string/app_name"
         android:theme="@style/OasisTheme" >
@@ -22,8 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".PodcastsActivity" ></activity>
+        <activity android:name=".PodcastsActivity" ></activity>
+        <activity android:name=".AboutActivity" ></activity>
     </application>
 
 </manifest>

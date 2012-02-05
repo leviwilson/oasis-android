@@ -43,6 +43,15 @@ public class DashboardFragment extends Fragment {
 			}
 		});
         
+        button = ViewHelper.findFor(view, R.id.home_btn_aboutus);
+        button.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), AboutActivity.class);
+				startActivity(intent);
+			}
+		});
+        
 		return view;
     }
 }
