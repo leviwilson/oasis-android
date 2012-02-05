@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.oasis"
+    package="com.oasisgranger"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="10" />
+    
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:icon="@drawable/ic_launcher"
+        android:name=".OasisGrangerApplication"
         android:label="@string/app_name"
         android:theme="@style/OasisTheme" >
         <activity
-            android:name="com.oasisgranger.HomeActivity"
+            android:name=".HomeActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".PodcastsActivity" ></activity>
     </application>
 
 </manifest>

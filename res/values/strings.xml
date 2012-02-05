@@ -5,5 +5,6 @@
     <string name="menu_item_podcast">Podcast</string>
     <string name="menu_item_calendar">Calendar</string>
     <string name="menu_item_aboutus">About Us</string>
+    <string name="podcast_json_url">https://www.googleapis.com/blogger/v2/blogs/8116355682857512629/posts?key=AIzaSyAfYr8fOxlrlXwhlGR_ZmA1x4c1P8mt9Ro</string>
 
 </resources>

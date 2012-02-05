@@ -20,7 +20,7 @@
     <Button
         android:id="@+id/home_btn_podcast"
         style="@style/DashboardButton"
-        android:drawableTop="@drawable/ic_music"
+        android:drawableTop="@drawable/home_btn_podcast"
         android:text="@string/menu_item_podcast" />
 
     <Button
