@@ -3,5 +3,8 @@
 
     <string name="hello">Hello World!</string>
     <string name="app_name">OasisAndroid</string>
+    <string name="menu_item_podcast">Podcast</string>
+    <string name="menu_item_calendar">Calendar</string>
+    <string name="menu_item_aboutus">About Us</string>
 
 </resources>
