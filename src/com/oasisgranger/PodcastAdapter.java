@@ -1,5 +1,6 @@
 package com.oasisgranger;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -34,6 +35,10 @@ public class PodcastAdapter extends ArrayAdapter<Podcast> {
 		
 		TextView titleText = ViewHelper.findFor(view, R.id.podcast_title);
 		titleText.setText(podcast.title);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("E MM/dd/yyyy");
+		TextView publishedText = ViewHelper.findFor(view, R.id.podcast_date);
+		publishedText.setText(sdf.format(podcast.published));
 		
 		return view;
 	}

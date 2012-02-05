@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentActivity;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.oasisgranger.helpers.ViewHelper;
 
 public class PodcastsActivity extends FragmentActivity {
@@ -23,6 +24,8 @@ public class PodcastsActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_podcasts);
+		
+		getSupportActionBar().setTitle("Podcasts");
 
 		ListView listView = ViewHelper.findFor(this, R.id.podcast_list);
 
@@ -51,7 +54,11 @@ public class PodcastsActivity extends FragmentActivity {
 				json.append(line);
 			}
 			
-			Podcasts full = new Gson().fromJson(json.toString(), Podcasts.class);
+			Gson gson = new GsonBuilder()
+				.setDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'Z'")
+				.create();
+			
+			Podcasts full = gson.fromJson(json.toString(), Podcasts.class);
 			for(Podcast podcast : full.items) {
 				podcasts.add(podcast);
 			}

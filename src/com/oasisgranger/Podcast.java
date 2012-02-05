@@ -1,8 +1,10 @@
 package com.oasisgranger;
 
+import java.util.Date;
+
 public class Podcast {
-	public String published;
-	public String updated;
+	public Date published;
+	public Date updated;
 	public String url;
 	public String title;
 	public String content;
