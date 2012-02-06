@@ -38,7 +38,7 @@ public class PodcastAdapter extends ArrayAdapter<Podcast> {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("E MM/dd/yyyy");
 		TextView publishedText = ViewHelper.findFor(view, R.id.podcast_date);
-		publishedText.setText(sdf.format(podcast.published));
+		publishedText.setText(sdf.format(podcast.publishedDate));
 		
 		return view;
 	}

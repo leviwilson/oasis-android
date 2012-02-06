@@ -55,11 +55,11 @@ public class PodcastsActivity extends FragmentActivity {
 			}
 			
 			Gson gson = new GsonBuilder()
-				.setDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'Z'")
+				.setDateFormat("EEE, dd MMM yyyy hh:mm:ss Z")
 				.create();
 			
 			Podcasts full = gson.fromJson(json.toString(), Podcasts.class);
-			for(Podcast podcast : full.items) {
+			for(Podcast podcast : full.responseData.feed.entries) {
 				podcasts.add(podcast);
 			}
 			
