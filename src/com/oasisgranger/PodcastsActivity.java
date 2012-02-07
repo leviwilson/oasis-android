@@ -11,25 +11,25 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.oasisgranger.helpers.ViewHelper;
 
-public class PodcastsActivity extends FragmentActivity {
+public class PodcastsActivity extends OasisFragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_podcasts);
 		
+		setContentView(R.layout.activity_podcasts);
+
 		getSupportActionBar().setTitle("Podcasts");
 
 		ListView listView = ViewHelper.findFor(this, R.id.podcast_list);
 
-		ArrayList<Podcast> podcasts = loadPodcasts();
+		final ArrayList<Podcast> podcasts = loadPodcasts();
 		PodcastAdapter adapter = new PodcastAdapter(getBaseContext(),
 				R.layout.podcast_item, podcasts);
 
@@ -45,7 +45,8 @@ public class PodcastsActivity extends FragmentActivity {
 			HttpResponse response = new DefaultHttpClient()
 					.execute(new HttpGet(url));
 
-			BufferedReader reader = new BufferedReader(new InputStreamReader( response.getEntity().getContent()));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					response.getEntity().getContent()));
 
 			StringBuilder json = new StringBuilder();
 			String line;
@@ -53,16 +54,15 @@ public class PodcastsActivity extends FragmentActivity {
 			while (null != (line = reader.readLine())) {
 				json.append(line);
 			}
-			
+
 			Gson gson = new GsonBuilder()
-				.setDateFormat("EEE, dd MMM yyyy hh:mm:ss Z")
-				.create();
-			
+				.setDateFormat( "EEE, dd MMM yyyy hh:mm:ss Z").create();
+
 			Podcasts full = gson.fromJson(json.toString(), Podcasts.class);
-			for(Podcast podcast : full.responseData.feed.entries) {
+			for (Podcast podcast : full.responseData.feed.entries) {
 				podcasts.add(podcast);
 			}
-			
+
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
