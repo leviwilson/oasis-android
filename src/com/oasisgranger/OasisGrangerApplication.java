@@ -1,22 +1,29 @@
 package com.oasisgranger;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
 import android.app.Application;
+
+import com.google.inject.Injector;
 
 public class OasisGrangerApplication extends Application {
 	
 	private Injector injector;
-	private OasisModule oasisModule = new OasisModule();
+	private DependencyConfigurator moduleBuilder;
 	
-	public <T> T instanceOf(Class<T> klass) {
-		return getInjector().getInstance(klass);
+	public OasisGrangerApplication() {
+		moduleBuilder = new DependencyConfigurator();
+	}
+	
+	public DependencyConfigurator configure() {
+		if( null != injector ) {
+			throw new RuntimeException("Too late to bind dependencies");
+		}
+		
+		return moduleBuilder;
 	}
 	
 	private Injector getInjector() {
 		if( null == injector ) {
-			injector = Guice.createInjector(oasisModule);
+			injector = moduleBuilder.getInjector();
 		}
 		
 		return injector;
