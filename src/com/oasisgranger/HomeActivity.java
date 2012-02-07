@@ -2,9 +2,8 @@
 package com.oasisgranger;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
-public class HomeActivity extends FragmentActivity {
+public class HomeActivity extends OasisFragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
