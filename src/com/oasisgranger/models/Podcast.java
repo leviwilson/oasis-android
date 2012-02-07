@@ -1,4 +1,4 @@
-package com.oasisgranger;
+package com.oasisgranger.models;
 
 import java.util.Date;
 

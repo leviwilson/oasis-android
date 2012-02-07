@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.oasisgranger.helpers.ViewHelper;
+import com.oasisgranger.models.Podcast;
 
 public class PodcastAdapter extends ArrayAdapter<Podcast> {
 

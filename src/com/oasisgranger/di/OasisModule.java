@@ -1,7 +1,8 @@
-package com.oasisgranger;
+package com.oasisgranger.di;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import com.oasisgranger.OasisPodcasts;
 
 public class OasisModule extends AbstractModule {
 

@@ -1,4 +1,4 @@
-package com.oasisgranger;
+package com.oasisgranger.di;
 
 import java.util.ArrayList;
 

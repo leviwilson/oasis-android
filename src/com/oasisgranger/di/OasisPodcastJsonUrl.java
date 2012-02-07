@@ -1,4 +1,4 @@
-package com.oasisgranger;
+package com.oasisgranger.di;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

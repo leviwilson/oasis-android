@@ -1,4 +1,5 @@
-package com.oasisgranger;
+package com.oasisgranger.models;
+
 
 public class Podcasts {
 	public static class ResponseData {

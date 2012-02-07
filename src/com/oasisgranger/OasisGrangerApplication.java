@@ -3,6 +3,7 @@ package com.oasisgranger;
 import android.app.Application;
 
 import com.google.inject.Injector;
+import com.oasisgranger.di.DependencyConfigurator;
 
 public class OasisGrangerApplication extends Application {
 	

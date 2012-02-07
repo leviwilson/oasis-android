@@ -13,6 +13,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.inject.Inject;
+import com.oasisgranger.di.OasisPodcastJsonUrl;
+import com.oasisgranger.models.Podcast;
+import com.oasisgranger.models.Podcasts;
 
 public class OasisPodcasts {
 	
