@@ -26,5 +26,9 @@ public class OasisActivityUnitTestCase<T extends Activity> extends ActivityUnitT
         getInstrumentation().callActivityOnPostCreate(activity, null);
         return activity;
 	}
+	
+	public OasisGrangerApplication getApplication() {
+		return oasisApplication;
+	}
 
 }

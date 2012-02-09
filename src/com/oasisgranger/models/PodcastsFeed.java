@@ -11,7 +11,21 @@ public class PodcastsFeed {
 		}
 		
 		public Feed feed;
+		
+		public ResponseData() {
+			feed = new Feed();
+		}
 	}
 	
 	public ResponseData responseData;
+	
+	public PodcastsFeed() {
+		responseData = new ResponseData();
+	}
+
+	public PodcastsFeed(Podcast[] podcasts) {
+		this();
+		responseData.feed.entries = podcasts;
+	}
+	
 }

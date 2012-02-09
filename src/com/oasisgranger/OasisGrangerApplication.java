@@ -33,4 +33,8 @@ public class OasisGrangerApplication extends Application {
 	public void injectInto(Object object) {
 		getInjector().injectMembers(object);
 	}
+
+	public <T> T instanceOf(Class<T> klass) {
+		return getInjector().getInstance(klass);
+	}
 }

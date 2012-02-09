@@ -33,12 +33,18 @@ public class PodcastsActivity extends OasisFragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_podcasts);
 
-		ActionBar actionBar = getSupportActionBar();
-		actionBar.setTitle("Podcasts");
-		actionBar.setDisplayHomeAsUpEnabled(true);
+		intializeActionBar();
 
 		listView = ViewHelper.findFor(this, R.id.podcast_list);
 		loadPodcasts();
+	}
+
+	private void intializeActionBar() {
+		ActionBar actionBar = getSupportActionBar();
+		if (null != actionBar) {
+			actionBar.setTitle("Podcasts");
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
 	}
 
 	@Override
@@ -53,9 +59,9 @@ public class PodcastsActivity extends OasisFragmentActivity {
 		case R.id.podcasts_refresh:
 			loadPodcasts();
 			return true;
-		
+
 		}
-		
+
 		return super.onOptionsItemSelected(item);
 	}
 
