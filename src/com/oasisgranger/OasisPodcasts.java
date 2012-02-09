@@ -15,7 +15,7 @@ import com.google.gson.GsonBuilder;
 import com.google.inject.Inject;
 import com.oasisgranger.di.OasisPodcastJsonUrl;
 import com.oasisgranger.models.Podcast;
-import com.oasisgranger.models.Podcasts;
+import com.oasisgranger.models.PodcastsFeed;
 
 public class OasisPodcasts {
 	
@@ -46,7 +46,7 @@ public class OasisPodcasts {
 			Gson gson = new GsonBuilder()
 				.setDateFormat( "EEE, dd MMM yyyy hh:mm:ss Z").create();
 
-			Podcasts full = gson.fromJson(json.toString(), Podcasts.class);
+			PodcastsFeed full = gson.fromJson(json.toString(), PodcastsFeed.class);
 			for (Podcast podcast : full.responseData.feed.entries) {
 				podcasts.add(podcast);
 			}

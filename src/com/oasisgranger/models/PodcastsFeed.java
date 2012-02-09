@@ -1,7 +1,7 @@
 package com.oasisgranger.models;
 
 
-public class Podcasts {
+public class PodcastsFeed {
 	public static class ResponseData {
 		public static class Feed {
 			public String feedUrl;
