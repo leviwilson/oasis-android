@@ -17,4 +17,13 @@ public class Podcast {
 	public String content;
 	public String link;
 	public MediaGroup[] mediaGroups;
+	
+	public Podcast() {
+		
+	}
+	
+	public Podcast(String title, Date date) {
+		this.title = title;
+		this.publishedDate = date;
+	}
 }

@@ -14,6 +14,8 @@ import com.oasisgranger.models.PodcastsFeed;
 
 public class OasisPodcasts {
 	
+	public static final String FEED_DATE_FORMAT = "EEE, dd MMM yyyy hh:mm:ss Z";
+
 	private final String oasisPodcastJson;
 	
 	@Inject
@@ -30,7 +32,7 @@ public class OasisPodcasts {
 
 		try {
 			Gson gson = new GsonBuilder()
-				.setDateFormat( "EEE, dd MMM yyyy hh:mm:ss Z").create();
+				.setDateFormat(FEED_DATE_FORMAT).create();
 			
 			String message = requestor.get(oasisPodcastJson).getMessage();
 
