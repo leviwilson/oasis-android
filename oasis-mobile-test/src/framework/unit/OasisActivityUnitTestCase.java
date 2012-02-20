@@ -5,10 +5,12 @@ import java.io.IOException;
 import android.app.Activity;
 import android.content.Intent;
 import android.test.ActivityUnitTestCase;
+import android.widget.TextView;
 
 import com.oasisgranger.OasisGrangerApplication;
 import com.oasisgranger.Requestor;
 import com.oasisgranger.Response;
+import com.oasisgranger.helpers.ViewHelper;
 
 public class OasisActivityUnitTestCase<T extends Activity> extends ActivityUnitTestCase<T> {
 	private OasisGrangerApplication oasisApplication = new OasisGrangerApplication();
@@ -49,6 +51,12 @@ public class OasisActivityUnitTestCase<T extends Activity> extends ActivityUnitT
 				return message;
 			}
 		});
+	}
+
+	protected String textFor(int id) {
+		TextView descriptionText = ViewHelper.findFor(getActivity(), id);
+		String text = descriptionText.getText().toString();
+		return text;
 	}
 
 }

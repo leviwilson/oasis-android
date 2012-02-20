@@ -1,11 +1,9 @@
 package framework.unit;
 
 import android.content.Intent;
-import android.widget.TextView;
 
 import com.oasisgranger.PodcastDetails;
 import com.oasisgranger.R;
-import com.oasisgranger.helpers.ViewHelper;
 import com.oasisgranger.models.Podcast;
 
 public class PodcastDetailsTest extends OasisActivityUnitTestCase<PodcastDetails> {
@@ -32,15 +30,13 @@ public class PodcastDetailsTest extends OasisActivityUnitTestCase<PodcastDetails
 		podcast.setTitle("Sermon Title");
 		startPodcastDetailsActivity();
 		
-		TextView titleText = ViewHelper.findFor(getActivity(), R.id.podcast_title);
-		assertEquals("Sermon Title", titleText.getText().toString());
+		assertEquals("Sermon Title", textFor(R.id.podcast_title));
 	}
 	
 	public void testThatTheDescriptionIsDisplayed() {
 		podcast.setDescription("This is the podcast description.");
 		startPodcastDetailsActivity();
 		
-		TextView descriptionText = ViewHelper.findFor(getActivity(), R.id.podcast_description);
-		assertEquals("This is the podcast description.", descriptionText.getText().toString());
+		assertEquals("This is the podcast description.", textFor(R.id.podcast_description));
 	}
 }

@@ -1,11 +1,14 @@
 package com.oasisgranger;
 
+import com.oasisgranger.helpers.ViewHelper;
+
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.MenuItem;
+import android.widget.TextView;
 
 public class OasisFragmentActivity extends FragmentActivity {
 
@@ -47,6 +50,11 @@ public class OasisFragmentActivity extends FragmentActivity {
 			actionBar.setTitle(title);
 			actionBar.setDisplayHomeAsUpEnabled(true);
 		}
+	}
+
+	protected void setTextFor(int id, String text) {
+		TextView titleView = ViewHelper.findFor(this, id);
+		titleView.setText(text);
 	}
 
 }

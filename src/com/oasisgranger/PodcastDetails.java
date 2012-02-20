@@ -1,9 +1,7 @@
 package com.oasisgranger;
 
 import android.os.Bundle;
-import android.widget.TextView;
 
-import com.oasisgranger.helpers.ViewHelper;
 import com.oasisgranger.models.Podcast;
 
 
@@ -17,11 +15,8 @@ public class PodcastDetails extends OasisFragmentActivity {
 		
 		Podcast podcast = getIntent().getParcelableExtra(Podcast.class.getName());
 		
-		TextView titleView = ViewHelper.findFor(this, R.id.podcast_title);
-		titleView.setText(podcast.getTitle());
-		
-		TextView descriptionView = ViewHelper.findFor(this, R.id.podcast_description);
-		descriptionView.setText(podcast.getDescription());
+		setTextFor(R.id.podcast_title, podcast.getTitle());
+		setTextFor(R.id.podcast_description, podcast.getDescription());
 	}
 
 }
