@@ -1,6 +1,5 @@
 package framework.unit;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -14,8 +13,6 @@ import com.google.gson.GsonBuilder;
 import com.oasisgranger.OasisPodcasts;
 import com.oasisgranger.PodcastsActivity;
 import com.oasisgranger.R;
-import com.oasisgranger.Requestor;
-import com.oasisgranger.Response;
 import com.oasisgranger.helpers.ViewHelper;
 import com.oasisgranger.models.Podcast;
 import com.oasisgranger.models.PodcastsFeed;
@@ -83,18 +80,6 @@ public class PodcastsActivityTest extends
 		Gson gson = new GsonBuilder().setDateFormat(
 				OasisPodcasts.FEED_DATE_FORMAT).create();
 		setupToRespondWith(gson.toJson(new PodcastsFeed(podcasts)));
-	}
-
-	private void setupToRespondWith(final String message) {
-		RequestorStub requestor = (RequestorStub) getApplication().instanceOf(
-				Requestor.class);
-		requestor.setResponse(new Response(null) {
-			@Override
-			public String getMessage() throws IllegalStateException,
-					IOException {
-				return message;
-			}
-		});
 	}
 
 }

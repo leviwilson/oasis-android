@@ -1,10 +1,14 @@
 package framework.unit;
 
-import com.oasisgranger.OasisGrangerApplication;
+import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.test.ActivityUnitTestCase;
+
+import com.oasisgranger.OasisGrangerApplication;
+import com.oasisgranger.Requestor;
+import com.oasisgranger.Response;
 
 public class OasisActivityUnitTestCase<T extends Activity> extends ActivityUnitTestCase<T> {
 	private OasisGrangerApplication oasisApplication = new OasisGrangerApplication();
@@ -21,7 +25,11 @@ public class OasisActivityUnitTestCase<T extends Activity> extends ActivityUnitT
 	}
 	
 	public T startActivityLifecycle() {
-		T activity = startActivity(new Intent(), null, null);
+		return startActivityLifecycleWith(new Intent());
+	}
+
+	public T startActivityLifecycleWith(Intent intent) {
+		T activity = startActivity(intent, null, null);
         getInstrumentation().callActivityOnStart(activity);
         getInstrumentation().callActivityOnPostCreate(activity, null);
         return activity;
@@ -29,6 +37,18 @@ public class OasisActivityUnitTestCase<T extends Activity> extends ActivityUnitT
 	
 	public OasisGrangerApplication getApplication() {
 		return oasisApplication;
+	}
+
+	protected void setupToRespondWith(final String message) {
+		RequestorStub requestor = (RequestorStub) getApplication().instanceOf(
+				Requestor.class);
+		requestor.setResponse(new Response(null) {
+			@Override
+			public String getMessage() throws IllegalStateException,
+					IOException {
+				return message;
+			}
+		});
 	}
 
 }

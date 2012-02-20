@@ -4,7 +4,6 @@ package com.oasisgranger;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActionBar;
 import android.support.v4.view.Menu;
 import android.support.v4.view.MenuItem;
 import android.view.View;
@@ -34,27 +33,19 @@ public class PodcastsActivity extends OasisFragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_podcasts);
 
-		intializeActionBar();
+		initializeChildTitle("Podcasts");
 
 		listView = ViewHelper.findFor(this, R.id.podcast_list);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Intent intent = new Intent(getBaseContext(), PodcastActivity.class);
+				Intent intent = new Intent(getBaseContext(), PodcastDetails.class);
 				intent.putExtra(Podcast.class.getName(), (Podcast)listView.getItemAtPosition(position));
 				startActivity(intent);
 			}
 		});
 		
 		loadPodcasts();
-	}
-
-	private void intializeActionBar() {
-		ActionBar actionBar = getSupportActionBar();
-		if (null != actionBar) {
-			actionBar.setTitle("Podcasts");
-			actionBar.setDisplayHomeAsUpEnabled(true);
-		}
 	}
 
 	@Override

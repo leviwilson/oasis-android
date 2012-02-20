@@ -3,6 +3,7 @@ package com.oasisgranger;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActionBar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.MenuItem;
 
@@ -38,6 +39,14 @@ public class OasisFragmentActivity extends FragmentActivity {
 
 	private OasisGrangerApplication getOasisApplication() {
 		return (OasisGrangerApplication) getApplication();
+	}
+
+	protected void initializeChildTitle(String title) {
+		ActionBar actionBar = getSupportActionBar();
+		if (null != actionBar) {
+			actionBar.setTitle(title);
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
 	}
 
 }

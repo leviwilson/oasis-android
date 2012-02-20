@@ -22,16 +22,17 @@ public class Podcast implements Parcelable {
 	public MediaGroup[] mediaGroups;
 	
 	public Podcast() {
-		
 	}
 	
 	public Podcast(String title, Date date) {
 		this.title = title;
 		this.publishedDate = date;
 	}
-
-	public int describeContents() {
-		return 0;
+	
+	public Podcast(Parcel source) {
+		title = source.readString();
+		content = source.readString();
+		link = source.readString();
 	}
 
 	public void writeToParcel(Parcel dest, int flags) {
@@ -39,4 +40,18 @@ public class Podcast implements Parcelable {
 		dest.writeString(content);
 		dest.writeString(link);
 	}
+
+	public int describeContents() {
+		return 0;
+	}
+	
+	public static final Parcelable.Creator<Podcast> CREATOR = new Creator<Podcast>() {
+		public Podcast createFromParcel(Parcel source) {
+			return new Podcast(source);
+		}
+		
+		public Podcast[] newArray(int size) {
+			return new Podcast[size];
+		}
+	};
 }

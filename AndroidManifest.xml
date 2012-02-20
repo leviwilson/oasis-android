@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PodcastsActivity" ></activity>
-        <activity android:name=".PodcastActivity" ></activity>
+        <activity android:name=".PodcastDetails" ></activity>
         <activity android:name=".AboutActivity" ></activity>
     </application>
 
