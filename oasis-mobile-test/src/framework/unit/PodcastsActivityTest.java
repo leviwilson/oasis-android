@@ -70,7 +70,7 @@ public class PodcastsActivityTest extends
 		assertNotNull(actualIntent);
 		
 		Podcast actualPodcast = actualIntent.getParcelableExtra(Podcast.class.getName());
-		assertEquals("My Title", actualPodcast.title);
+		assertEquals("My Title", actualPodcast.getTitle());
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
 		assertEquals("1/1/2012", dateFormat.format(actualPodcast.publishedDate));

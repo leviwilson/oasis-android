@@ -16,9 +16,9 @@ public class Podcast implements Parcelable {
 	}
 
 	public Date publishedDate;
-	public String title;
-	public String content;
-	public String link;
+	private String title;
+	private String content;
+	private String link;
 	public MediaGroup[] mediaGroups;
 	
 	public Podcast() {
@@ -54,4 +54,8 @@ public class Podcast implements Parcelable {
 			return new Podcast[size];
 		}
 	};
+
+	public String getTitle() {
+		return title;
+	}
 }
