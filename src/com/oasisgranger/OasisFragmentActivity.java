@@ -1,14 +1,13 @@
 package com.oasisgranger;
 
-import com.oasisgranger.helpers.ViewHelper;
-
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.MenuItem;
 import android.widget.TextView;
+
+import com.oasisgranger.helpers.ViewHelper;
 
 public class OasisFragmentActivity extends FragmentActivity {
 
@@ -23,7 +22,9 @@ public class OasisFragmentActivity extends FragmentActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			goHome();
+			if (!isHome()) {
+				goBack();
+			}
 
 			// Get rid of the slide-in animation, if possible
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
@@ -34,10 +35,12 @@ public class OasisFragmentActivity extends FragmentActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void goHome() {
-		Intent intent = new Intent(this, HomeActivity.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(intent);
+	private void goBack() {
+		finish();
+	}
+
+	private boolean isHome() {
+		return HomeActivity.class.equals(this.getClass());
 	}
 
 	private OasisGrangerApplication getOasisApplication() {

@@ -15,6 +15,7 @@ public class PodcastDetails extends OasisFragmentActivity {
 		
 		Podcast podcast = getIntent().getParcelableExtra(Podcast.class.getName());
 		
+		initializeChildTitle(podcast.getTitle());
 		setTextFor(R.id.podcast_title, podcast.getTitle());
 		setTextFor(R.id.podcast_description, podcast.getDescription());
 	}
