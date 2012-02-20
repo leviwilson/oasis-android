@@ -1,6 +1,7 @@
 package framework.unit;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.content.Intent;
@@ -11,7 +12,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.oasisgranger.OasisPodcasts;
-import com.oasisgranger.PodcastActivity;
 import com.oasisgranger.PodcastsActivity;
 import com.oasisgranger.R;
 import com.oasisgranger.Requestor;
@@ -37,7 +37,7 @@ public class PodcastsActivityTest extends
 
 	public void testThatWeCanLoadPodcasts() {
 		Podcast[] podcasts = { new Podcast() };
-		setupToRespondWith(podcasts);
+		setupToReturn(podcasts);
 		startActivityLifecycle();
 
 		ListView listView = ViewHelper
@@ -47,7 +47,7 @@ public class PodcastsActivityTest extends
 
 	public void testThatWeLoadTitleAndDate() {
 		Podcast[] podcasts = { new Podcast("My Title", new Date("1/1/2012")) };
-		setupToRespondWith(podcasts);
+		setupToReturn(podcasts);
 		startActivityLifecycle();
 
 		ListView listView = ViewHelper
@@ -60,8 +60,26 @@ public class PodcastsActivityTest extends
 		assertEquals("My Title", title.getText().toString());
 		assertEquals("Sun 01/01/2012", date.getText().toString());
 	}
+	
+	public void testThatWeWillShowDetailsForAPodcast() {
+		Podcast[] podcasts = { new Podcast("My Title", new Date("1/1/2012")) };
+		setupToReturn(podcasts);
+		startActivityLifecycle();
+		
+		ListView listView = ViewHelper.findFor(getActivity(), R.id.podcast_list);
+		listView.getOnItemClickListener().onItemClick(null, null, 0, 0);
+		
+		Intent actualIntent = getStartedActivityIntent();
+		assertNotNull(actualIntent);
+		
+		Podcast actualPodcast = actualIntent.getParcelableExtra(Podcast.class.getName());
+		assertEquals("My Title", actualPodcast.title);
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+		assertEquals("1/1/2012", dateFormat.format(actualPodcast.publishedDate));
+	}
 
-	private void setupToRespondWith(Podcast[] podcasts) {
+	private void setupToReturn(Podcast[] podcasts) {
 		Gson gson = new GsonBuilder().setDateFormat(
 				OasisPodcasts.FEED_DATE_FORMAT).create();
 		setupToRespondWith(gson.toJson(new PodcastsFeed(podcasts)));

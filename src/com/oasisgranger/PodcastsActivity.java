@@ -14,6 +14,7 @@ import android.widget.ListView;
 
 import com.google.inject.Inject;
 import com.oasisgranger.helpers.ViewHelper;
+import com.oasisgranger.models.Podcast;
 import com.oasisgranger.task.TaskRunner;
 
 public class PodcastsActivity extends OasisFragmentActivity {
@@ -38,8 +39,9 @@ public class PodcastsActivity extends OasisFragmentActivity {
 		listView = ViewHelper.findFor(this, R.id.podcast_list);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent(getBaseContext(), PodcastActivity.class);
+				intent.putExtra(Podcast.class.getName(), (Podcast)listView.getItemAtPosition(position));
 				startActivity(intent);
 			}
 		});

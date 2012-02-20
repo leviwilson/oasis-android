@@ -2,7 +2,10 @@ package com.oasisgranger.models;
 
 import java.util.Date;
 
-public class Podcast {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Podcast implements Parcelable {
 	public static class MediaGroup {
 		public static class Enclosure {
 			public String url;
@@ -25,5 +28,15 @@ public class Podcast {
 	public Podcast(String title, Date date) {
 		this.title = title;
 		this.publishedDate = date;
+	}
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(title);
+		dest.writeString(content);
+		dest.writeString(link);
 	}
 }
