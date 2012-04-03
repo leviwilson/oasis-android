@@ -19,7 +19,8 @@ public class Podcast implements Parcelable {
 	private String title;
 	private String contentSnippet;
 	private String link;
-	public MediaGroup[] mediaGroups;
+	private String mediaUrl;
+	private MediaGroup[] mediaGroups;
 	
 	public Podcast() {
 	}
@@ -33,12 +34,14 @@ public class Podcast implements Parcelable {
 		title = source.readString();
 		contentSnippet = source.readString();
 		link = source.readString();
+		mediaUrl = source.readString();
 	}
 
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(title);
 		dest.writeString(contentSnippet);
 		dest.writeString(link);
+		dest.writeString(getMediaUrl());
 	}
 
 	public int describeContents() {
@@ -69,5 +72,13 @@ public class Podcast implements Parcelable {
 
 	public String getDescription() {
 		return contentSnippet;
+	}
+	
+	public String getMediaUrl() {
+		if( null == mediaUrl ) {
+			mediaUrl = mediaGroups[0].contents[0].url;
+		}
+		
+		return mediaUrl;
 	}
 }
