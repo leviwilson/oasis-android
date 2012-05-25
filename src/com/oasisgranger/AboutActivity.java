@@ -1,11 +1,10 @@
 package com.oasisgranger;
 
 import android.os.Bundle;
-import android.support.v4.app.ActionBar;
 
 import com.oasisgranger.R;
 
-public class AboutActivity extends OasisFragmentActivity {
+public class AboutActivity extends OasisActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -13,8 +12,8 @@ public class AboutActivity extends OasisFragmentActivity {
 		
 		setContentView(R.layout.activity_about);
 		
-		ActionBar actionBar = getSupportActionBar();
-		actionBar.setTitle("About Oasis");
-		actionBar.setDisplayHomeAsUpEnabled(true);
+//		ActionBar actionBar = getSupportActionBar();
+//		actionBar.setTitle("About Oasis");
+//		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 }

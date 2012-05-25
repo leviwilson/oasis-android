@@ -1,0 +1,15 @@
+bin/
+*/bin
+.DS_Store
+gen/
+*/gen
+*.swp
+*.swo
+*/gen
+/target
+**/target/
+**/tmp/*
+.metadata
+local.properties
+coverage.em
+app/junit*.properties

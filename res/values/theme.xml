@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="OasisTheme" parent="@style/Theme.Sherlock.Light">
+    <style name="OasisTheme" parent="@android:style/Theme.Light">
     </style>
     
 </resources>

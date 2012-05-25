@@ -4,8 +4,8 @@ package com.oasisgranger;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.Menu;
-import android.support.v4.view.MenuItem;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -16,7 +16,7 @@ import com.oasisgranger.helpers.ViewHelper;
 import com.oasisgranger.models.Podcast;
 import com.oasisgranger.task.TaskRunner;
 
-public class PodcastsActivity extends OasisFragmentActivity {
+public class PodcastsActivity extends OasisActivity {
 
 	@Inject OasisPodcasts oasisPodcasts;
 

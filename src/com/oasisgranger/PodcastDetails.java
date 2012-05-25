@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.oasisgranger.models.Podcast;
 
 
-public class PodcastDetails extends OasisFragmentActivity {
+public class PodcastDetails extends OasisActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
