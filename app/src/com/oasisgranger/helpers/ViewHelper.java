@@ -15,4 +15,12 @@ public class ViewHelper {
 		return (ViewType) view.findViewById(id);
 	}
 
+	public static void clickOn(Activity activity, int id) {
+		activity.findViewById(id).performClick();
+	}
+
+	public static void clickOn(View view, int id) {
+		view.findViewById(id).performClick();
+	}
+
 }
