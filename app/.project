@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>oasis-mobile-test</name>
+	<name>oasis_app</name>
 	<comment></comment>
 	<projects>
-		<project>oasis-mobile</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
