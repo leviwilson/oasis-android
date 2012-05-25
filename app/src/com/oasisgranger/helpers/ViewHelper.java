@@ -23,4 +23,8 @@ public class ViewHelper {
 		view.findViewById(id).performClick();
 	}
 
+	public static ActivityClickHandler afterClicking(final Activity activity, final int id) {
+		return new ActivityClickHandler(activity, id);
+	}
+
 }
