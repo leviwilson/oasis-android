@@ -6,10 +6,8 @@ import android.support.v4.view.MenuCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.oasisgranger.R.id;
-import com.oasisgranger.helpers.ViewHelper;
 
 public class OasisActivity extends com.google.actionbar.ActionBarActivity {
 
@@ -57,10 +55,5 @@ public class OasisActivity extends com.google.actionbar.ActionBarActivity {
 	private OasisGrangerApplication getOasisApplication() {
 		return (OasisGrangerApplication) getApplication();
 	}
-
-	protected void setTextFor(int id, String text) {
-		TextView titleView = ViewHelper.findFor(this, id);
-		titleView.setText(text);
-	}
-
+	
 }
