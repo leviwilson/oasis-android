@@ -33,7 +33,7 @@ public class PodcastsActivity extends OasisActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_podcasts);
 
-		initializeChildTitle("Podcasts");
+		setTitle("Podcasts");
 
 		listView = ViewHelper.findFor(this, R.id.podcast_list);
 		listView.setOnItemClickListener(new OnItemClickListener() {

@@ -58,14 +58,6 @@ public class OasisActivity extends com.google.actionbar.ActionBarActivity {
 		return (OasisGrangerApplication) getApplication();
 	}
 
-	protected void initializeChildTitle(String title) {
-//		ActionBar actionBar = null;
-//		if (null != actionBar) {
-//			actionBar.setTitle(title);
-//			actionBar.setDisplayHomeAsUpEnabled(true);
-//		}
-	}
-
 	protected void setTextFor(int id, String text) {
 		TextView titleView = ViewHelper.findFor(this, id);
 		titleView.setText(text);
