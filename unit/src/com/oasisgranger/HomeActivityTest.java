@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.oasisgranger.R.id;
+import com.oasisgranger.test.OasisTestRunner;
 
 @RunWith(OasisTestRunner.class)
 public class HomeActivityTest {

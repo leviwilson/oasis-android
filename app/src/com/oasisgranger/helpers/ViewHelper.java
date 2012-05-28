@@ -38,4 +38,14 @@ public class ViewHelper {
 		textView.setText(text);
 	}
 
+	public static String textOf(final Activity activity, int id) {
+		final TextView textView = findFor(activity, id);
+		return textView.getText().toString();
+	}
+
+	public static String textOf(final View view, int id) {
+		final TextView textView = findFor(view, id);
+		return textView.getText().toString();
+	}
+
 }

@@ -1,4 +1,4 @@
-package com.oasisgranger;
+package com.oasisgranger.test;
 
 import java.io.File;
 
