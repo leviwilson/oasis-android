@@ -24,7 +24,7 @@ final class LoadPodcastsWorkItem implements WorkItem<Void, ArrayList<Podcast>> {
 	}
 
 	public void onPostExecute(ArrayList<Podcast> podcasts) {
-		PodcastAdapter adapter = new PodcastAdapter(this.podcastsActivity.getBaseContext(),
+		PodcastAdapter adapter = new PodcastAdapter(this.podcastsActivity.getApplicationContext(),
 				R.layout.podcast_item, podcasts);
 		this.podcastsActivity.listView.setAdapter(adapter);
 		progressDialog.dismiss();

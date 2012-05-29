@@ -24,10 +24,18 @@ public class DependencyConfigurator {
 	
 	public <T> DependencyConfigurator withBinding(final Class<T> klass, final T instance) {
 		overrides.add(new AbstractModule() {
-			
-			@Override
 			protected void configure() {
 				bind(klass).toInstance(instance);
+			}
+		});
+		
+		return this;
+	}
+
+	public <T, TOther extends T> DependencyConfigurator withBinding(final Class<T> klass, final Class<TOther> otherKlass) {
+		overrides.add(new AbstractModule() {
+			protected void configure() {
+				bind(klass).to(otherKlass);
 			}
 		});
 		

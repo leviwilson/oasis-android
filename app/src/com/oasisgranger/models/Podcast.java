@@ -23,6 +23,7 @@ public class Podcast implements Parcelable {
 	private MediaGroup[] mediaGroups;
 	
 	public Podcast() {
+		this.publishedDate = new Date();
 	}
 	
 	public Podcast(String title, Date date) {

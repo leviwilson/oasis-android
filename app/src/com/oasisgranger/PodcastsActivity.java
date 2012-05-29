@@ -39,7 +39,7 @@ public class PodcastsActivity extends OasisActivity {
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Intent intent = new Intent(getBaseContext(), PodcastDetails.class);
+				Intent intent = new Intent(getApplicationContext(), PodcastDetails.class);
 				intent.putExtra(Podcast.class.getName(), (Podcast)listView.getItemAtPosition(position));
 				startActivity(intent);
 			}
