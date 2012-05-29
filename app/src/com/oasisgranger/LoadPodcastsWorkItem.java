@@ -4,13 +4,12 @@ import java.util.ArrayList;
 
 import android.content.DialogInterface;
 
+import com.oasisgranger.R.layout;
 import com.oasisgranger.models.Podcast;
 import com.oasisgranger.task.WorkItem;
 
 final class LoadPodcastsWorkItem implements WorkItem<Void, ArrayList<Podcast>> {
-	/**
-	 * 
-	 */
+	
 	private final PodcastsActivity podcastsActivity;
 	private final DialogInterface progressDialog;
 
@@ -25,7 +24,7 @@ final class LoadPodcastsWorkItem implements WorkItem<Void, ArrayList<Podcast>> {
 
 	public void onPostExecute(ArrayList<Podcast> podcasts) {
 		PodcastAdapter adapter = new PodcastAdapter(this.podcastsActivity.getApplicationContext(),
-				R.layout.podcast_item, podcasts);
+				layout.podcast_item, podcasts);
 		this.podcastsActivity.listView.setAdapter(adapter);
 		progressDialog.dismiss();
 	}
