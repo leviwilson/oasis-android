@@ -4,4 +4,4 @@ before_script:
   - tar -zxf android-sdk_r18-linux.tgz
   - chmod -R 777 ./android-sdk-linux
   - export ANDROID_HOME=./android-sdk-linux
-script:  "mvn -f ./app/pom.xml clean install"
+script:  "sudo mvn -f ./app/pom.xml clean install"
