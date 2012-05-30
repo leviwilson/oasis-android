@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.actionbar;
+package com.example.android.actionbarcompat;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -23,6 +23,8 @@ import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+
+import com.google.actionbar.SimpleMenu;
 
 /**
  * A <em>really</em> dumb implementation of the {@link android.view.MenuItem} interface, that's only
@@ -149,6 +151,7 @@ public class SimpleMenuItem implements MenuItem {
         return false;
     }
 
+    @Override
     public MenuItem setOnActionExpandListener(OnActionExpandListener onActionExpandListener) {
         // Noop
         return this;

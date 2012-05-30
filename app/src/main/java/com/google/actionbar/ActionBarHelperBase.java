@@ -16,10 +16,12 @@
 
 package com.google.actionbar;
 
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-
-import com.oasisgranger.R;
 
 import android.app.Activity;
 import android.content.Context;
@@ -38,9 +40,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import com.example.android.actionbarcompat.SimpleMenuItem;
+import com.oasisgranger.R;
 
 /**
  * A class that implements the action bar pattern for pre-Honeycomb devices.

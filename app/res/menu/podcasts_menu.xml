@@ -3,7 +3,6 @@
     
     <item
         android:icon="@drawable/ic_refresh"
-        android:showAsAction="always"
         android:title="Refresh"
         android:id="@+id/podcasts_refresh"/>
 

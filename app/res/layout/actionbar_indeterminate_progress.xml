@@ -20,7 +20,6 @@
     android:gravity="center" >
 
     <ProgressBar
-        style="?android:attr/indeterminateProgressStyle"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_gravity="center"

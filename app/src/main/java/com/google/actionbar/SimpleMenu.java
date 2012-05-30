@@ -16,6 +16,8 @@
 
 package com.google.actionbar;
 
+import java.util.ArrayList;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +27,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 
-import java.util.ArrayList;
+import com.example.android.actionbarcompat.SimpleMenuItem;
 
 /**
  * A <em>really</em> dumb implementation of the {@link android.view.Menu} interface, that's only
