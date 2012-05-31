@@ -2,4 +2,7 @@ language: java
 before_script:
   - wget http://dl.google.com/android/android-sdk_r18-linux.tgz
   - tar -zxf android-sdk_r18-linux.tgz
-script:  "sudo mvn -f ./app/pom.xml -Dandroid.sdk.path=../android-sdk-linux clean install"
+  - export ANDROID_HOME=./android-sdk-linux
+  - export PATH=${PATH}:${ANDROID_HOME}/tools
+  - export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+script:  "mvn -f ./app/pom.xml clean install"
