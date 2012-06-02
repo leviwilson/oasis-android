@@ -5,4 +5,6 @@ before_script:
   - export ANDROID_HOME=android-sdk-linux
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
   - android update sdk --filter 1,2,4,9 --no-ui --force
+  - mvn install:install-file -DgroupId=com.pivotallabs -DartifactId=robolectric -Dversion=1.2-SNAPSHOT -Dfile=./libs/robolectric-1.2-jar-with-dependencies.jar -Dpackaging=jar
+  - mvn install:install-file -DgroupId=com.google.android.maps -DartifactId=maps -Dversion=11_r1 -Dfile=./libs/maps.jar -Dpackaging=jar
 script:  "mvn -f ./app/pom.xml clean install"
