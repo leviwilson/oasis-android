@@ -1,5 +1,6 @@
 language: java
 before_script:
+  - pwd
   - wget http://dl.google.com/android/android-sdk_r18-linux.tgz
   - tar -zxf android-sdk_r18-linux.tgz
   - export ANDROID_HOME=~/android-sdk-linux
