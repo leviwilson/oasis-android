@@ -4,5 +4,5 @@ before_script:
   - tar -zxf android-sdk_r18-linux.tgz
   - export ANDROID_HOME=android-sdk-linux
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
-  - android-sdk-linux/android update sdk --filter 2 --no-ui --force
+  - ./android-sdk-linux/android update sdk --filter 2 --no-ui --force
 script:  "mvn -f ./app/pom.xml clean install"
