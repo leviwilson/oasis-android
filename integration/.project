@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>oasis_app</name>
+	<name>oasis-mobile-test</name>
 	<comment></comment>
 	<projects>
+		<project>oasis_app</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -25,22 +26,9 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
-			<name>org.maven.ide.eclipse.maven2Builder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.maven.ide.eclipse.maven2Nature</nature>
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>java</name>
-			<type>2</type>
-			<location>/Users/leviwilson/git/android/oasis-mobile/app/src/main/java</location>
-		</link>
-	</linkedResources>
 </projectDescription>

@@ -9,6 +9,7 @@ gen/
 /target
 **/target/
 **/tmp/*
+tmp/*
 .metadata
 local.properties
 coverage.em
