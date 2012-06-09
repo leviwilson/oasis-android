@@ -2,6 +2,7 @@
 <resources>
 
     <style name="OasisTheme" parent="@android:style/Theme.Light">
+        <item name="android:textSize">@dimen/text_small</item>
     </style>
     
 </resources>
