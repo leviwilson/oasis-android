@@ -1,7 +1,5 @@
 package com.oasisgranger.test;
 
-import java.io.File;
-
 import org.junit.runners.model.InitializationError;
 import org.mockito.MockitoAnnotations;
 
