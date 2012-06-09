@@ -61,14 +61,14 @@
       <pathelement location="../unit/libs/junit-4.10.jar" />
       <pathelement location="../unit/libs/maps.jar" />
       <pathelement location="../unit/libs/android-support-v4.jar" />
-      <pathelement location="${sdk.dir}/platforms/android-14/android.jar" />
+      <pathelement location="${sdk.dir}/platforms/android-15/android.jar" />
       <pathelement location="../unit/libs/mockito-all-1.9.0.jar" />
       <pathelement location="${out.test.dir}" />
       <path refid="classpath.base" />
     </path>
 
 
-    <target name="compile-tests" depends="-compile">
+    <target name="compile-tests">
       <mkdir dir="${out.test.dir}" />
       <javac srcdir="${test.dir}" destdir="${out.test.dir}" includeantruntime="false" verbose="false">
         <classpath refid="classpath.test"/>
