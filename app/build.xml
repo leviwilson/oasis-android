@@ -6,8 +6,6 @@
          Version Control Systems. -->
     <property environment="env"/>
 
-    <copy file="${env.USER}-local.properties" tofile="local.properties"
-      overwrite="true" />
     <property file="local.properties" />
 
 
