@@ -5,6 +5,4 @@ before_install:
   - export ANDROID_HOME=~/builds/leviwilson/oasis-android/android-sdk-linux
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
   - android update sdk --filter 1,2,4,9 --no-ui --force
-  - mvn install:install-file -DgroupId=com.pivotallabs -DartifactId=robolectric -Dversion=1.2-SNAPSHOT -Dfile=./libs/robolectric-1.2-jar-with-dependencies.jar -Dpackaging=jar
-  - mvn install:install-file -DgroupId=com.google.android.maps -DartifactId=maps -Dversion=11_r1 -Dfile=./libs/maps.jar -Dpackaging=jar
-  - mvn dependency:resolve -Dsilent=true -DoutputScope=false
+  - cd app

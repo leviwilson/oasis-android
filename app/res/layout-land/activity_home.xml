@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" >
+
+    <Button
+        android:id="@+id/home_btn_podcast"
+        style="@style/DashboardButton"
+        android:layout_weight="0.25"
+        android:drawableTop="@drawable/home_btn_podcast"
+        android:text="@string/menu_item_podcast" />
+
+    <Button
+        android:id="@+id/home_btn_calendar"
+        style="@style/DashboardButton"
+        android:layout_weight="0.25"
+        android:drawableTop="@drawable/ic_calendar"
+        android:text="@string/menu_item_calendar" />
+
+    <Button
+        android:id="@+id/home_btn_aboutus"
+        style="@style/DashboardButton"
+        android:layout_weight="0.25"
+        android:drawableTop="@drawable/ic_information"
+        android:text="@string/menu_item_aboutus" />
+
+    <Button
+        android:id="@+id/home_btn_share"
+        style="@style/DashboardButton"
+        android:layout_weight="0.25"
+        android:drawableTop="@drawable/ic_share"
+        android:text="@string/menu_item_share" />
+
+</LinearLayout>
