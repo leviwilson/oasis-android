@@ -1,6 +1,7 @@
 package com.oasisgranger;
 
 import android.app.Application;
+import android.content.Intent;
 
 import com.google.inject.Injector;
 import com.oasisgranger.di.DependencyConfigurator;
@@ -12,6 +13,12 @@ public class OasisGrangerApplication extends Application {
 	
 	public OasisGrangerApplication() {
 		moduleBuilder = new DependencyConfigurator();
+	}
+	
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		startService(new Intent(this, PodcastService.class));
 	}
 	
 	public DependencyConfigurator configure() {
