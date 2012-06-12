@@ -1,4 +1,4 @@
-package framework.unit;
+package com.oasisgranger;
 
 import static com.oasisgranger.helpers.ViewHelper.textOf;
 import static com.xtremelabs.robolectric.Robolectric.shadowOf;
