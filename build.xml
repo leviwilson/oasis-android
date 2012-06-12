@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="OasisMobile">
+  <property name="emma.dir" value="${sdk.dir}/tools/lib" />
+  <property environment="env" />
+
+  <macrodef name="ant-for-all-projects">
+    <attribute name="target" default="NOT SET" />
+    <attribute name="failonerror" default="true" />
+    <sequential>
+      <exec executable="ant" dir="./app" failonerror="@{failonerror}">
+        <arg value="@{target}" />
+      </exec>
+      <exec executable="ant" dir="./integration" failonerror="@{failonerror}">
+        <arg value="@{target}" />
+      </exec>
+    </sequential>
+  </macrodef>
+
+  <target name="clean">
+    <ant-for-all-projects target="clean" />
+  </target>
+
+  <target name="deploy" depends="clean">
+    <exec executable="ant" dir="./app" failonerror="true">
+      <arg value="uninstall" />
+      <arg value="debug" />
+      <arg value="test" />
+      <arg value="install" />
+    </exec>
+  </target>
+
+  <tempfile property="integration.output" />
+
+  <target name="test" depends="deploy">
+    <exec executable="ant" dir="./integration" failonerror="true">
+      <arg value="debug" />
+    </exec>
+    <exec executable="adb" dir="./integration" failonerror="true">
+      <arg value="install" />
+      <arg value="bin/integration-debug.apk" />
+    </exec>
+    <exec executable="/bin/sh" dir="./integration" failonerror="false">
+      <arg line="-c 'ant test 2>&amp;1 |tee ${integration.output}'" />
+    </exec>
+    <exec executable="grep" dir="./integration" failonerror="false" resultproperty="integration.result">
+      <arg line="-q FAILURES '${integration.output}'" />
+    </exec>
+    <delete file="${integration.output}" />
+    <fail message="Integration tests failed!">
+      <condition>
+        <equals arg1="0" arg2="${integration.result}" />
+      </condition>
+    </fail>
+  </target>
+
+</project>
+
