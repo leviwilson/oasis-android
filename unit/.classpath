@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/oasis_app"/>
-	<classpathentry kind="lib" path="libs/robolectric-1.2-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="libs/robolectric-1.2-jar-with-dependencies.jar" sourcepath="libs/robolectric-1.2-sources.jar"/>
 	<classpathentry kind="lib" path="libs/mockito-all-1.9.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="libs/android.jar"/>
