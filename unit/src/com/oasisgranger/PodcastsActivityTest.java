@@ -5,10 +5,10 @@ import static com.oasisgranger.helpers.ViewHelper.textOf;
 import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.junit.Before;
@@ -20,28 +20,16 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ListView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.oasisgranger.OasisGrangerApplication;
-import com.oasisgranger.OasisPodcasts;
-import com.oasisgranger.PodcastDetails;
-import com.oasisgranger.PodcastsActivity;
 import com.oasisgranger.R.id;
-import com.oasisgranger.Requestor;
-import com.oasisgranger.Response;
 import com.oasisgranger.models.Podcast;
-import com.oasisgranger.models.PodcastsFeed;
 import com.oasisgranger.test.OasisTestRunner;
 import com.xtremelabs.robolectric.Robolectric;
 
 @RunWith(OasisTestRunner.class)
 public class PodcastsActivityTest {
 
-	@Mock
-	Requestor requestor;
-	@Mock
-	Response response;
-
+	@Mock OasisPodcasts oasisPodcasts;
+	
 	private PodcastsActivity activity;
 
 	@Before
@@ -56,7 +44,7 @@ public class PodcastsActivityTest {
 		setupToReturn(new Podcast());
 		startActivity();
 
-		final ListView listView = findFor(activity, id.podcast_list);
+		final ListView listView = podcastList();
 		assertThat(listView.getCount(), is(1));
 	}
 
@@ -67,8 +55,7 @@ public class PodcastsActivityTest {
 		setupToReturn(podcast);
 		startActivity();
 
-		final ListView listView = findFor(activity, id.podcast_list);
-		final View view = listView.getAdapter().getView(0, null, null);
+		final View view = podcastList().getAdapter().getView(0, null, null);
 
 		assertThat(textOf(view, id.podcast_title), is("My Title"));
 		assertThat(textOf(view, id.podcast_date), is("Sun 01/01/2012"));
@@ -83,8 +70,7 @@ public class PodcastsActivityTest {
 		setupToReturn(podcast);
 		startActivity();
 
-		final ListView listView = findFor(activity, id.podcast_list);
-		listView.getOnItemClickListener().onItemClick(null, null, 0, 0);
+		clickOnFirstItem();
 		
 		final Intent started = shadowOf(activity).getNextStartedActivity();
 		assertThat(started.getComponent().getClassName(), is(PodcastDetails.class.getName()));
@@ -100,25 +86,23 @@ public class PodcastsActivityTest {
 
 	private void setupMocks() throws Exception {
 		OasisGrangerApplication application = (OasisGrangerApplication) Robolectric.application;
-		application.configure().withBinding(Requestor.class, requestor);
+		application.configure().withBinding(OasisPodcasts.class, oasisPodcasts);
+		
+		when(oasisPodcasts.load()).thenReturn(new ArrayList<Podcast>());
+	}
 
-		when(requestor.get(anyString())).thenReturn(response);
-		when(response.getMessage()).thenReturn(
-				"{responseData: {feed: {entries: [] }}}");
+	private ListView podcastList() {
+		final ListView listView = findFor(activity, id.podcast_list);
+		return listView;
+	}
+
+	private void clickOnFirstItem() {
+		podcastList().getOnItemClickListener().onItemClick(null, null, 0, 0);
 	}
 
 	private void setupToReturn(Podcast... podcasts) {
-		final Gson gson = new GsonBuilder().setDateFormat(
-				OasisPodcasts.FEED_DATE_FORMAT).create();
-
-		try {
-			when(response.getMessage()).thenReturn(
-					gson.toJson(new PodcastsFeed(podcasts)));
-		} catch (IllegalStateException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		ArrayList<Podcast> podcastList = new ArrayList<Podcast>(Arrays.asList(podcasts));
+		when(oasisPodcasts.load()).thenReturn(podcastList);
 	}
 
 }
