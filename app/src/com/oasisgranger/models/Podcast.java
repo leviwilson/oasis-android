@@ -82,4 +82,8 @@ public class Podcast implements Parcelable {
 		
 		return mediaUrl;
 	}
+
+	public void setMediaUrl(final String mediaUrl) {
+		this.mediaUrl = mediaUrl;
+	}
 }
