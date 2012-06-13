@@ -2,10 +2,10 @@ package com.oasisgranger;
 
 import android.test.ApplicationTestCase;
 
-public class OasisPodcastsTest extends ApplicationTestCase<OasisGrangerApplication> {
+public class OasisPodcastsTest extends ApplicationTestCase<OasisGrangerApp> {
 	
 	public OasisPodcastsTest() {
-		super(OasisGrangerApplication.class);
+		super(OasisGrangerApp.class);
 	}
 	
 	@Override

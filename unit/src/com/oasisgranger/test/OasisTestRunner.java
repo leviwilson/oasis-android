@@ -7,7 +7,7 @@ import org.mockito.MockitoAnnotations;
 
 import android.app.Application;
 
-import com.oasisgranger.OasisGrangerApplication;
+import com.oasisgranger.OasisGrangerApp;
 import com.oasisgranger.task.TaskRunner;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 
@@ -26,7 +26,7 @@ public class OasisTestRunner extends RobolectricTestRunner {
 	
 	@Override
 	protected Application createApplication() {
-		final OasisGrangerApplication application =  new OasisGrangerApplication();
+		final OasisGrangerApp application =  new OasisGrangerApp();
 		application.configure()
 			.withBinding(TaskRunner.class, InlineTaskRunner.class);
 		return application;

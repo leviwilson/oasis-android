@@ -8,5 +8,6 @@
     <string name="podcast_json_url">http://json-podcast.oasisgranger.com/</string>
     <string name="menu_item_share">Share</string>
     <string name="play">Play</string>
+    <string name="stop">Stop</string>
 
 </resources>

@@ -55,7 +55,7 @@ public class PodcastPlayerActivityTest {
 	}
 
 	private void setupMocks() {
-		OasisGrangerApplication application = (OasisGrangerApplication) Robolectric.application; 
+		OasisGrangerApp application = (OasisGrangerApp) Robolectric.application; 
 		application.configure().withBinding(PodcastPlayer.class, podcastPlayer);
 	}
 

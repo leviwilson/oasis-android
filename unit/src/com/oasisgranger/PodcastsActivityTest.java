@@ -85,7 +85,7 @@ public class PodcastsActivityTest {
 	}
 
 	private void setupMocks() throws Exception {
-		OasisGrangerApplication application = (OasisGrangerApplication) Robolectric.application;
+		OasisGrangerApp application = (OasisGrangerApp) Robolectric.application;
 		application.configure().withBinding(OasisPodcasts.class, oasisPodcasts);
 		
 		when(oasisPodcasts.load()).thenReturn(new ArrayList<Podcast>());

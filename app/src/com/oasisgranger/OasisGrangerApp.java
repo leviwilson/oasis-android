@@ -5,12 +5,12 @@ import android.app.Application;
 import com.google.inject.Injector;
 import com.oasisgranger.di.DependencyConfigurator;
 
-public class OasisGrangerApplication extends Application {
+public class OasisGrangerApp extends Application {
 	
 	private Injector injector;
 	private DependencyConfigurator moduleBuilder;
 	
-	public OasisGrangerApplication() {
+	public OasisGrangerApp() {
 		moduleBuilder = new DependencyConfigurator();
 	}
 	

@@ -52,8 +52,8 @@ public class OasisActivity extends com.google.actionbar.ActionBarActivity {
 		return HomeActivity.class.equals(this.getClass());
 	}
 
-	private OasisGrangerApplication getOasisApplication() {
-		return (OasisGrangerApplication) getApplication();
+	private OasisGrangerApp getOasisApplication() {
+		return (OasisGrangerApp) getApplication();
 	}
 	
 }
