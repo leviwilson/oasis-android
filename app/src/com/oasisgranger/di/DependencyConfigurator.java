@@ -2,6 +2,8 @@ package com.oasisgranger.di;
 
 import java.util.ArrayList;
 
+import android.content.Context;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -13,8 +15,8 @@ public class DependencyConfigurator {
 	private OasisModule oasisModule;
 	private ArrayList<Module> overrides = new ArrayList<Module>();
 	
-	public DependencyConfigurator() {
-		this.oasisModule = new OasisModule();
+	public DependencyConfigurator(final Context context) {
+		this.oasisModule = new OasisModule(context);
 	}
 	
 	public DependencyConfigurator withModule(OasisModule module) {

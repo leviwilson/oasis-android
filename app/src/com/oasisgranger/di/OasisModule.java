@@ -1,5 +1,6 @@
 package com.oasisgranger.di;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 
 import com.google.inject.AbstractModule;
@@ -13,6 +14,12 @@ import com.oasisgranger.task.AsyncTaskRunner;
 import com.oasisgranger.task.TaskRunner;
 
 public class OasisModule extends AbstractModule {
+
+	private Context context;
+	
+	public OasisModule(final Context context) {
+		this.context = context;
+	}
 
 	@Override
 	protected void configure() {
@@ -37,6 +44,11 @@ public class OasisModule extends AbstractModule {
 	@OasisPodcastJsonUrl
 	public String getOasisPodcastJsonUrl() {
 		return "http://json-podcast.oasisgranger.com";
+	}
+	
+	@Provides
+	public Context getContext() {
+		return context;
 	}
 	
 }

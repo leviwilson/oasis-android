@@ -11,7 +11,7 @@ public class OasisGrangerApp extends Application {
 	private DependencyConfigurator moduleBuilder;
 	
 	public OasisGrangerApp() {
-		moduleBuilder = new DependencyConfigurator();
+		moduleBuilder = new DependencyConfigurator(this);
 	}
 	
 	@Override
