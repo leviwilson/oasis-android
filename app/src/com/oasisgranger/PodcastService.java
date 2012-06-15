@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.google.inject.Inject;
 import com.oasisgranger.media.PlayAfterPrepared;
@@ -37,7 +38,7 @@ public class PodcastService extends OasisService {
 			mediaPlayer.setDataSource(podcast.getMediaUrl());
 			mediaPlayer.prepareAsync();
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.v(getClass().getName(), e.getMessage());
 		}
 	}
 
