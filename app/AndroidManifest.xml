@@ -26,6 +26,8 @@
         <activity android:name=".PodcastDetails" ></activity>
         <activity android:name=".AboutActivity" ></activity>
         <activity android:name=".PodcastPlayerActivity" ></activity>
+        
+        <service android:name=".PodcastService"></service>
     </application>
 
 </manifest>
