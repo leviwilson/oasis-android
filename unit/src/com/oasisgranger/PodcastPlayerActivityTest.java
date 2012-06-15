@@ -12,7 +12,7 @@ import org.mockito.Mock;
 
 import android.content.Intent;
 
-import com.oasisgranger.media.PodcastPlayer;
+import com.oasisgranger.media.PodcastServiceConnector;
 import com.oasisgranger.models.Podcast;
 import com.oasisgranger.test.OasisTestRunner;
 import com.xtremelabs.robolectric.Robolectric;
@@ -20,7 +20,7 @@ import com.xtremelabs.robolectric.Robolectric;
 @RunWith(OasisTestRunner.class)
 public class PodcastPlayerActivityTest {
 	
-	@Mock PodcastPlayer podcastPlayer;
+	@Mock PodcastServiceConnector podcastPlayer;
 	
 	private PodcastPlayerActivity activity;
 
@@ -41,7 +41,7 @@ public class PodcastPlayerActivityTest {
 	@Test
 	public void itInitiallyPlaysThePodast() {
 		startActivity();
-		verify(podcastPlayer).play(podcast);
+		verify(podcastPlayer).connectWith(podcast);
 	}
 
 	private void startActivity() {
@@ -56,7 +56,7 @@ public class PodcastPlayerActivityTest {
 
 	private void setupMocks() {
 		OasisGrangerApp application = (OasisGrangerApp) Robolectric.application; 
-		application.configure().withBinding(PodcastPlayer.class, podcastPlayer);
+		application.configure().withBinding(PodcastServiceConnector.class, podcastPlayer);
 	}
 
 }

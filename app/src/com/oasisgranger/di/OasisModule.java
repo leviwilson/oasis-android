@@ -8,7 +8,7 @@ import com.google.inject.Provides;
 import com.oasisgranger.DialogFacade;
 import com.oasisgranger.OasisPodcasts;
 import com.oasisgranger.Requestor;
-import com.oasisgranger.media.PodcastPlayer;
+import com.oasisgranger.media.PodcastServiceConnector;
 import com.oasisgranger.media.PodcastServiceConnection;
 import com.oasisgranger.task.AsyncTaskRunner;
 import com.oasisgranger.task.TaskRunner;
@@ -30,7 +30,7 @@ public class OasisModule extends AbstractModule {
 	private void bindProduction() {
 		bind(DialogFacade.class).to(DialogFactory.class);
 		bind(MediaPlayer.class);
-		bind(PodcastPlayer.class);
+		bind(PodcastServiceConnector.class);
 		bind(PodcastServiceConnection.class);
 		bind(Requestor.class).to(HttpRequestor.class);
 		bind(TaskRunner.class).to(AsyncTaskRunner.class);

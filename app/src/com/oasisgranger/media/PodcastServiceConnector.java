@@ -7,18 +7,18 @@ import com.google.inject.Inject;
 import com.oasisgranger.PodcastService;
 import com.oasisgranger.models.Podcast;
 
-public class PodcastPlayer {
+public class PodcastServiceConnector {
 	
 	private final Context context;
 	private final PodcastServiceConnection serviceConnection;
 
 	@Inject
-	public PodcastPlayer(final Context context, final PodcastServiceConnection serviceConnection) {
+	public PodcastServiceConnector(final Context context, final PodcastServiceConnection serviceConnection) {
 		this.context = context;
 		this.serviceConnection = serviceConnection;
 	}
 
-	public void play(Podcast podcast) {
+	public void connectWith(Podcast podcast) {
 		final Intent service = new Intent(context, PodcastService.class);
 		service.putExtra(Podcast.class.getName(), podcast);
 		

@@ -23,22 +23,22 @@ import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.matchers.StartedServiceMatcher;
 
 @RunWith(OasisTestRunner.class)
-public class PodcastPlayerTest {
+public class PodcastServiceConnectionTest {
 	
-	private PodcastPlayer player;
+	private PodcastServiceConnector player;
 	
 	@Spy Context context = Robolectric.application;
 	@Spy PodcastServiceConnection serviceConnection;
 	
 	@Before
 	public void setUp() {
-		player = new PodcastPlayer(context, serviceConnection);
+		player = new PodcastServiceConnector(context, serviceConnection);
 	}
 	
 	@Test
 	public void itStartsThePodcastService() {
 		final Podcast podcast = new Podcast();
-		player.play(podcast);
+		player.connectWith(podcast);
 		
 		final Intent expectedService = new Intent(context, PodcastService.class);
 		expectedService.putExtra(Podcast.class.getName(), podcast);
@@ -48,7 +48,7 @@ public class PodcastPlayerTest {
 	
 	@Test
 	public void itConnectsToTheService() {
-		player.play(new Podcast());
+		player.connectWith(new Podcast());
 		
 		ArgumentCaptor<Intent> intentArg = ArgumentCaptor.forClass(Intent.class);
 		verify(context).startService(intentArg.capture());
@@ -58,7 +58,7 @@ public class PodcastPlayerTest {
 	
 	@Test
 	public void itCanDisconnectFromTheService() {
-		player.play(new Podcast());
+		player.connectWith(new Podcast());
 		player.disconnect();
 		
 		ArgumentCaptor<ServiceConnection> connectArg = ArgumentCaptor.forClass(ServiceConnection.class);

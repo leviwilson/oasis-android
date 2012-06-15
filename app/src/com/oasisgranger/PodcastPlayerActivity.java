@@ -4,12 +4,12 @@ import android.os.Bundle;
 
 import com.google.inject.Inject;
 import com.oasisgranger.R.layout;
-import com.oasisgranger.media.PodcastPlayer;
+import com.oasisgranger.media.PodcastServiceConnector;
 import com.oasisgranger.models.Podcast;
 
 public class PodcastPlayerActivity extends OasisActivity {
 	
-	@Inject private PodcastPlayer player;
+	@Inject private PodcastServiceConnector player;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +17,6 @@ public class PodcastPlayerActivity extends OasisActivity {
 		setContentView(layout.activity_podcast_player);
 		
 		setTitle("");
-		player.play(getIntent().<Podcast>getParcelableExtra(Podcast.class.getName()));
+		player.connectWith(getIntent().<Podcast>getParcelableExtra(Podcast.class.getName()));
 	}
 }
