@@ -6,9 +6,12 @@ import android.os.IBinder;
 
 public class OasisService extends Service {
 	
-	public OasisService() {
+	@Override
+	public void onCreate() {
 		final OasisGrangerApp app = (OasisGrangerApp) getApplication();
 		app.injectInto(this);
+		
+		super.onCreate();
 	}
 
 	@Override
