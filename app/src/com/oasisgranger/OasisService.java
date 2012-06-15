@@ -16,7 +16,7 @@ public class OasisService extends Service {
 
 	@Override
 	public IBinder onBind(Intent intent) {
-		return null;
+		throw new IllegalStateException("You must implement onBind yourself");
 	}
 
 }
