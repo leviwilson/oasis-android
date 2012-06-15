@@ -26,6 +26,10 @@ public class PodcastPlayer {
 		context.startService(service);
 		context.bindService(service, serviceConnection, 0);
 	}
+
+	public void disconnect() {
+		context.unbindService(serviceConnection);
+	}
 	
 	private ServiceConnection serviceConnection = new ServiceConnection() {
 		

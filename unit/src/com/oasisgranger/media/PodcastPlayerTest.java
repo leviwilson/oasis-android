@@ -2,6 +2,7 @@ package com.oasisgranger.media;
 
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
@@ -52,6 +53,17 @@ public class PodcastPlayerTest {
 		verify(context).startService(intentArg.capture());
 		
 		verify(context).bindService(eq(intentArg.getValue()), any(ServiceConnection.class), eq(0));
+	}
+	
+	@Test
+	public void itCanDisconnectFromTheService() {
+		player.play(new Podcast());
+		player.disconnect();
+		
+		ArgumentCaptor<ServiceConnection> connectArg = ArgumentCaptor.forClass(ServiceConnection.class);
+		verify(context).bindService(any(Intent.class), connectArg.capture(), anyInt());
+		
+		verify(context).unbindService(connectArg.getValue());
 	}
 	
 }
