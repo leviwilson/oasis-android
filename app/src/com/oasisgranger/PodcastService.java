@@ -14,8 +14,7 @@ import com.oasisgranger.models.Podcast;
 
 public class PodcastService extends OasisService {
 
-	@Inject
-	private MediaPlayer mediaPlayer;
+	@Inject private MediaPlayer mediaPlayer;
 
 	@Override
 	public IBinder onBind(Intent podcastIntent) {
@@ -24,7 +23,11 @@ public class PodcastService extends OasisService {
 		initializePlayer();
 		prepareAudioFor(podcast);
 
-		return new PlayerBinding();
+		return new PlayerBinding(this);
+	}
+	
+	public MediaPlayer getPlayer() {
+		return mediaPlayer;
 	}
 
 	private void initializePlayer() {
