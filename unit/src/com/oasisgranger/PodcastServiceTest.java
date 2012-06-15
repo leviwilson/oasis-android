@@ -7,11 +7,13 @@ import static org.mockito.Mockito.verify;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Spy;
 
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnPreparedListener;
 
 import com.oasisgranger.media.PlayerBinding;
 import com.oasisgranger.models.Podcast;
@@ -67,6 +69,17 @@ public class PodcastServiceTest {
 		podcastService.onBind(podcastIntent());
 		
 		verify(mediaPlayer).prepareAsync();
+	}
+	
+	@Test
+	public void oncePreparedItWillPlayThePodcast() {
+		podcastService.onBind(podcastIntent());
+		
+		ArgumentCaptor<OnPreparedListener> listenerArg = ArgumentCaptor.forClass(OnPreparedListener.class);
+		verify(mediaPlayer).setOnPreparedListener(listenerArg.capture());
+		
+		listenerArg.getValue().onPrepared(mediaPlayer);
+		verify(mediaPlayer).start();
 	}
 	
 	private Intent podcastIntent() {
