@@ -1,5 +1,6 @@
 package com.oasisgranger;
 
+import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
@@ -13,6 +14,7 @@ import org.mockito.Spy;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
 
 import com.oasisgranger.media.PlayerBinding;
@@ -80,6 +82,17 @@ public class PodcastServiceTest {
 		
 		listenerArg.getValue().onPrepared(mediaPlayer);
 		verify(mediaPlayer).start();
+	}
+	
+	@Test
+	public void itStopsItselfWhenThePodcastIsOver() {
+		podcastService.onBind(podcastIntent());
+		
+		ArgumentCaptor<OnCompletionListener> completedArg = ArgumentCaptor.forClass(OnCompletionListener.class);
+		verify(mediaPlayer).setOnCompletionListener(completedArg.capture());
+		
+		completedArg.getValue().onCompletion(mediaPlayer);
+		assertThat(shadowOf(podcastService).isStoppedBySelf(), is(true));
 	}
 	
 	private Intent podcastIntent() {
