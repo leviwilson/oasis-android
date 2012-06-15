@@ -37,6 +37,7 @@ public class PodcastServiceTest {
 		application.configure()
 			.withBinding(MediaPlayer.class, mediaPlayer);
 		podcastService = new PodcastService();
+		podcastService.onCreate();
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
