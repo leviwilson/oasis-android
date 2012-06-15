@@ -57,7 +57,6 @@
       <pathelement location="../app/libs/gson-2.0.jar" />
       <pathelement location="../app/libs/javax.inject.jar" />
       <pathelement location="../unit/libs/robolectric-1.2-jar-with-dependencies.jar" />
-      <pathelement location="../unit/libs/hamcrest-core-1.3.0RC2.jar" />
       <pathelement location="../unit/libs/junit-4.10.jar" />
       <pathelement location="../unit/libs/maps.jar" />
       <pathelement location="../unit/libs/android-support-v4.jar" />
