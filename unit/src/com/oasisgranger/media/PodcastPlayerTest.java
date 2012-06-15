@@ -28,10 +28,11 @@ public class PodcastPlayerTest {
 	private PodcastPlayer player;
 	
 	@Spy Context context = Robolectric.application;
+	@Spy PodcastServiceConnection serviceConnection;
 	
 	@Before
 	public void setUp() {
-		player = new PodcastPlayer(context);
+		player = new PodcastPlayer(context, serviceConnection);
 	}
 	
 	@Test
