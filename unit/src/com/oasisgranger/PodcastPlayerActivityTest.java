@@ -1,6 +1,7 @@
 package com.oasisgranger;
 
 import static com.oasisgranger.helpers.ViewHelper.clickOn;
+import static com.oasisgranger.helpers.ViewHelper.textOf;
 import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -28,7 +29,6 @@ public class PodcastPlayerActivityTest {
 	@Mock PlayerBinding player;
 	
 	private PodcastPlayerActivity activity;
-
 	private Podcast podcast;
 	
 	@Before
@@ -51,8 +51,11 @@ public class PodcastPlayerActivityTest {
 	
 	@Test
 	public void itCanPauseThePodcast() {
+		appearAsPlaying();
 		startActivity();
+		
 		clickOn(activity, id.play_or_pause);
+		
 		verify(player).pause();
 	}
 	
@@ -69,6 +72,42 @@ public class PodcastPlayerActivityTest {
 		
 		activity.onStop();
 		verify(serviceConnector).disconnect();
+	}
+	
+	@Test
+	public void pauseIsDisplayedIfPlaying() {
+		appearAsPlaying();
+		startActivity();
+		
+		assertThat(textOf(activity, id.play_or_pause), is("Pause"));
+	}
+	
+	@Test
+	public void wePauseIfPlaying() {
+		appearAsPlaying();
+		startActivity();
+		
+		clickOn(activity, id.play_or_pause);
+		
+		verify(player).pause();
+	}
+	
+	@Test
+	public void playIsDisplayedIfNotPlaying() {
+		appearAsPaused();
+		startActivity();
+		
+		assertThat(textOf(activity, id.play_or_pause), is("Play"));
+	}
+	
+	@Test
+	public void wePlayIfNotPlaying() {
+		appearAsPaused();
+		startActivity();
+		
+		clickOn(activity, id.play_or_pause);
+		
+		verify(player).play();
 	}
 
 	private void startActivity() {
@@ -88,6 +127,14 @@ public class PodcastPlayerActivityTest {
 			.withBinding(PodcastServiceConnector.class, serviceConnector);
 		
 		when(serviceConnector.getPlayer()).thenReturn(player);
+	}
+
+	private void appearAsPlaying() {
+		when(player.isPlaying()).thenReturn(true);
+	}
+
+	private void appearAsPaused() {
+		when(player.isPlaying()).thenReturn(false);
 	}
 
 }

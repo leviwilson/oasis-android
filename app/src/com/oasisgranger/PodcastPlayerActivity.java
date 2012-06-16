@@ -4,6 +4,7 @@ import static com.oasisgranger.helpers.ViewHelper.findFor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 
 import com.google.inject.Inject;
 import com.oasisgranger.R.id;
@@ -15,6 +16,7 @@ import com.oasisgranger.models.Podcast;
 public class PodcastPlayerActivity extends OasisActivity {
 
 	@Inject private PodcastServiceConnector serviceConnection;
+	private Button playPauseButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,14 @@ public class PodcastPlayerActivity extends OasisActivity {
 		
 		serviceConnection.connectWith(thePodcast());
 		
-		findFor(this, id.play_or_pause).setOnClickListener(new OnPauseListener());
+		playPauseButton = findFor(this, id.play_or_pause);
+		playPauseButton.setOnClickListener(new OnPausePlayListener());
+		if( getPlayer().isPlaying() ) {
+			playPauseButton.setText("Pause");
+		} else {
+			playPauseButton.setText("Play");
+		}
+		
 		findFor(this, id.stop).setOnClickListener(new OnStopListener());
 	}
 	
@@ -49,10 +58,14 @@ public class PodcastPlayerActivity extends OasisActivity {
 		}
 	}
 
-	private final class OnPauseListener implements OnClickListener {
+	private final class OnPausePlayListener implements OnClickListener {
 		@Override
 		public void onClick(View v) {
-			getPlayer().pause();
+			if (getPlayer().isPlaying()) {
+				getPlayer().pause();
+			} else {
+				getPlayer().play();
+			}
 		}
 	}
 }
