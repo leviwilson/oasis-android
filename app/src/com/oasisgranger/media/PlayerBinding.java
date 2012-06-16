@@ -19,6 +19,14 @@ public class PlayerBinding extends Binder {
 		this.service = service;
 		this.mediaPlayer = this.service.getPlayer();
 	}
+	
+	public void toggleAudio() {
+		if( isPlaying() ) {
+			pause();
+		} else {
+			play();
+		}
+	}
 
 	public void play() {
 		mediaPlayer.start();

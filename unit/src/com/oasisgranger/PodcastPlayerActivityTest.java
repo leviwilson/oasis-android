@@ -11,11 +11,13 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 
 import android.content.Intent;
 
 import com.oasisgranger.R.id;
+import com.oasisgranger.media.OnPlayerConnectedListener;
 import com.oasisgranger.media.PlayerBinding;
 import com.oasisgranger.media.PodcastServiceConnector;
 import com.oasisgranger.models.Podcast;
@@ -50,16 +52,6 @@ public class PodcastPlayerActivityTest {
 	}
 	
 	@Test
-	public void itCanPauseThePodcast() {
-		appearAsPlaying();
-		startActivity();
-		
-		clickOn(activity, id.play_or_pause);
-		
-		verify(player).pause();
-	}
-	
-	@Test
 	public void itCanStopThePodcast() {
 		startActivity();
 		clickOn(activity, id.stop);
@@ -83,16 +75,6 @@ public class PodcastPlayerActivityTest {
 	}
 	
 	@Test
-	public void wePauseIfPlaying() {
-		appearAsPlaying();
-		startActivity();
-		
-		clickOn(activity, id.play_or_pause);
-		
-		verify(player).pause();
-	}
-	
-	@Test
 	public void playIsDisplayedIfNotPlaying() {
 		appearAsPaused();
 		startActivity();
@@ -101,13 +83,26 @@ public class PodcastPlayerActivityTest {
 	}
 	
 	@Test
-	public void wePlayIfNotPlaying() {
-		appearAsPaused();
+	public void weCanToggleTheAudioState() {
+		appearAsPlaying();
 		startActivity();
 		
 		clickOn(activity, id.play_or_pause);
 		
-		verify(player).play();
+		verify(player).toggleAudio();
+	}
+	
+	@Test
+	public void audioStateIsCorrectWhenToggling() {
+		startActivity();
+		
+		appearAsPlaying();
+		clickOn(activity, id.play_or_pause);
+		assertThat(textOf(activity, id.play_or_pause), is("Pause"));
+		
+		appearAsPaused();
+		clickOn(activity, id.play_or_pause);
+		assertThat(textOf(activity, id.play_or_pause), is("Play"));
 	}
 
 	private void startActivity() {
@@ -118,6 +113,7 @@ public class PodcastPlayerActivityTest {
 		activity.setIntent(intent);
 		
 		shadowOf(activity).create();
+		beConnected();
 	}
 
 	private void setupMocks() {
@@ -135,6 +131,12 @@ public class PodcastPlayerActivityTest {
 
 	private void appearAsPaused() {
 		when(player.isPlaying()).thenReturn(false);
+	}
+
+	private void beConnected() {
+		ArgumentCaptor<OnPlayerConnectedListener> listenerArg = ArgumentCaptor.forClass(OnPlayerConnectedListener.class);
+		verify(serviceConnector).setOnPlayerConnected(listenerArg.capture());
+		listenerArg.getValue().onConnected(player);
 	}
 
 }
