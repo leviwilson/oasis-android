@@ -27,5 +27,9 @@ public class PlayerBinding extends Binder {
 		mediaPlayer.stop();
 		service.stopSelf();
 	}
+
+	public boolean isPlaying() {
+		return mediaPlayer.isPlaying();
+	}
 	
 }

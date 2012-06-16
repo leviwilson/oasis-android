@@ -50,4 +50,10 @@ public class PlayerBindingTest {
 		playerBinding.stop();
 		verify(podcastService).stopSelf();
 	}
+	
+	@Test
+	public void itKnowsIfTheMediaIsPlayingOrNot() {
+		playerBinding.isPlaying();
+		verify(mediaPlayer).isPlaying();
+	}
 }
