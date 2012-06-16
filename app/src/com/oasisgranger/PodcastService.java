@@ -7,7 +7,6 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.google.inject.Inject;
-import com.oasisgranger.media.PlayAfterPrepared;
 import com.oasisgranger.media.PlayerBinding;
 import com.oasisgranger.media.StopServiceWhenComplete;
 import com.oasisgranger.models.Podcast;
@@ -20,20 +19,22 @@ public class PodcastService extends OasisService {
 	public IBinder onBind(Intent podcastIntent) {
 		final Podcast podcast = getPodcast(podcastIntent);
 
-		initializePlayer();
+		final PlayerBinding player = initializePlayer();
 		prepareAudioFor(podcast);
 
-		return new PlayerBinding(this);
+		return player;
 	}
 	
 	public MediaPlayer getPlayer() {
 		return mediaPlayer;
 	}
 
-	private void initializePlayer() {
+	private PlayerBinding initializePlayer() {
+		final PlayerBinding player = new PlayerBinding(this);
 		mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-		mediaPlayer.setOnPreparedListener(new PlayAfterPrepared());
+		mediaPlayer.setOnPreparedListener(player);
 		mediaPlayer.setOnCompletionListener(new StopServiceWhenComplete(this));
+		return player;
 	}
 
 	private void prepareAudioFor(final Podcast podcast) {

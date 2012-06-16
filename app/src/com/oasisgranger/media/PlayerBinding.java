@@ -3,12 +3,14 @@ package com.oasisgranger.media;
 import com.oasisgranger.PodcastService;
 
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Binder;
 
-public class PlayerBinding extends Binder {
+public class PlayerBinding extends Binder implements OnPreparedListener {
 
 	private final MediaPlayer mediaPlayer;
 	private final PodcastService service;
+	private boolean isPrepared;
 	
 	protected PlayerBinding() {
 		mediaPlayer = null;
@@ -42,7 +44,13 @@ public class PlayerBinding extends Binder {
 	}
 
 	public boolean isPlaying() {
-		return mediaPlayer.isPlaying();
+		return isPrepared && mediaPlayer.isPlaying();
+	}
+
+	@Override
+	public void onPrepared(MediaPlayer mp) {
+		isPrepared = true;
+		play();
 	}
 	
 }

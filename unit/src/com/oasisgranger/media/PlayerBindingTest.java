@@ -1,5 +1,7 @@
 package com.oasisgranger.media;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -28,6 +30,34 @@ public class PlayerBindingTest {
 	}
 	
 	@Test
+	public void itAutoPlaysWhenPrepared() {
+		playerBinding.onPrepared(mediaPlayer);
+		verify(mediaPlayer).start();
+	}
+	
+	@Test
+	public void itIsNotPlayingIfItHasNotBeenPrepared() {
+		when(mediaPlayer.isPlaying()).thenReturn(true);
+		assertThat(playerBinding.isPlaying(), is(false));
+	}
+	
+	@Test
+	public void itIsNotPlayingIfPreparedButPaused() {
+		playerBinding.onPrepared(mediaPlayer);
+		when(mediaPlayer.isPlaying()).thenReturn(false);
+		
+		assertThat(playerBinding.isPlaying(), is(false));
+	}
+	
+	@Test
+	public void itIsPlayingIfPreparedAndPlaying() {
+		playerBinding.onPrepared(mediaPlayer);
+		when(mediaPlayer.isPlaying()).thenReturn(true);
+		
+		assertThat(playerBinding.isPlaying(), is(true));
+	}
+	
+	@Test
 	public void itPlays() {
 		playerBinding.play();
 		verify(mediaPlayer).start();
@@ -49,11 +79,5 @@ public class PlayerBindingTest {
 	public void stopAlsoStopsTheService() {
 		playerBinding.stop();
 		verify(podcastService).stopSelf();
-	}
-	
-	@Test
-	public void itKnowsIfTheMediaIsPlayingOrNot() {
-		playerBinding.isPlaying();
-		verify(mediaPlayer).isPlaying();
 	}
 }
