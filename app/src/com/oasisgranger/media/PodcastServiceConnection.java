@@ -7,10 +7,12 @@ import android.os.IBinder;
 public class PodcastServiceConnection implements ServiceConnection {
 
 	private PlayerBinding player = new NullPlayerBinding();
+	private OnPlayerConnectedListener onPlayerConnected;
 
 	@Override
 	public void onServiceConnected(ComponentName name, IBinder service) {
-		player = (PlayerBinding)service;
+		player = (PlayerBinding) service;
+		notifyListeners();
 	}
 
 	@Override
@@ -20,5 +22,15 @@ public class PodcastServiceConnection implements ServiceConnection {
 	public PlayerBinding getPlayer() {
 		return player;
 	}
-	
+
+	public void setOnPlayerConnected(final OnPlayerConnectedListener listener) {
+		onPlayerConnected = listener;
+	}
+
+	private void notifyListeners() {
+		if (null != onPlayerConnected) {
+			onPlayerConnected.onConnected(player);
+		}
+	}
+
 }
