@@ -30,4 +30,8 @@ public class PodcastServiceConnector {
 		context.unbindService(serviceConnection);
 	}
 
+	public PlayerBinding getPlayer() {
+		return serviceConnection.getPlayer();
+	}
+
 }

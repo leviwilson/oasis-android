@@ -10,7 +10,7 @@
         android:layout_alignParentBottom="true" >
 
         <Button
-            android:id="@+id/play"
+            android:id="@+id/play_or_pause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
