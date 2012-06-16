@@ -19,8 +19,7 @@ public class PodcastServiceConnector {
 	}
 
 	public void connectWith(Podcast podcast) {
-		final Intent service = new Intent(context, PodcastService.class);
-		service.putExtra(Podcast.class.getName(), podcast);
+		final Intent service = serviceFor(podcast);
 		
 		context.startService(service);
 		context.bindService(service, serviceConnection, 0);
@@ -32,6 +31,12 @@ public class PodcastServiceConnector {
 
 	public PlayerBinding getPlayer() {
 		return serviceConnection.getPlayer();
+	}
+
+	private Intent serviceFor(Podcast podcast) {
+		final Intent service = new Intent(context, PodcastService.class);
+		service.putExtra(Podcast.class.getName(), podcast);
+		return service;
 	}
 
 }
