@@ -6,7 +6,7 @@ import android.os.IBinder;
 
 public class PodcastServiceConnection implements ServiceConnection {
 
-	private PlayerBinding player;
+	private PlayerBinding player = new NullPlayerBinding();
 
 	@Override
 	public void onServiceConnected(ComponentName name, IBinder service) {

@@ -9,6 +9,11 @@ public class PlayerBinding extends Binder {
 
 	private final MediaPlayer mediaPlayer;
 	private final PodcastService service;
+	
+	protected PlayerBinding() {
+		mediaPlayer = null;
+		service = null;
+	}
 
 	public PlayerBinding(final PodcastService service) {
 		this.service = service;

@@ -1,7 +1,6 @@
 package com.oasisgranger.media;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
@@ -24,8 +23,8 @@ public class PodcastServiceConnectionTest {
 	}
 
 	@Test
-	public void itInitiallyHasNoPlayer() {
-		assertThat(serviceConnection.getPlayer(), is(nullValue()));
+	public void itInitiallyHasANullPlayer() {
+		assertThat(serviceConnection.getPlayer(), is(NullPlayerBinding.class));
 	}
 	
 	@Test
