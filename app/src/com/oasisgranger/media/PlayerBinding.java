@@ -1,16 +1,17 @@
 package com.oasisgranger.media;
 
-import com.oasisgranger.PodcastService;
-
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Binder;
+
+import com.oasisgranger.PodcastService;
 
 public class PlayerBinding extends Binder implements OnPreparedListener {
 
 	private final MediaPlayer mediaPlayer;
 	private final PodcastService service;
 	private boolean isPrepared;
+	private OnInitialPlaybackListener onInitialPlayback;
 	
 	protected PlayerBinding() {
 		mediaPlayer = null;
@@ -51,6 +52,17 @@ public class PlayerBinding extends Binder implements OnPreparedListener {
 	public void onPrepared(MediaPlayer mp) {
 		isPrepared = true;
 		play();
+		signalOnInitialPlayback();
+	}
+	
+	public void setOnInitialPlaybackListener(final OnInitialPlaybackListener listener) {
+		onInitialPlayback = listener;
+	}
+
+	private void signalOnInitialPlayback() {
+		if( null != onInitialPlayback ) {
+			onInitialPlayback.onInitialPlayback(this);
+		}
 	}
 	
 }

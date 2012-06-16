@@ -1,6 +1,7 @@
 package com.oasisgranger.media;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -79,5 +80,30 @@ public class PlayerBindingTest {
 	public void stopAlsoStopsTheService() {
 		playerBinding.stop();
 		verify(podcastService).stopSelf();
+	}
+	
+	@Test
+	public void itSignalsWhenPlaybackHasStarted() {
+		final TestOnInitialPlayback listener = new TestOnInitialPlayback();
+		playerBinding.setOnInitialPlaybackListener(listener);
+		
+		playerBinding.onPrepared(mediaPlayer);
+		
+		assertThat(listener.getPlayer(), sameInstance(playerBinding));
+	}
+	
+	private final class TestOnInitialPlayback extends OnInitialPlaybackListener {
+
+		private PlayerBinding player;
+
+		@Override
+		public void onInitialPlayback(PlayerBinding player) {
+			this.player = player;
+		}
+		
+		public PlayerBinding getPlayer() {
+			return this.player;
+		}
+		
 	}
 }
