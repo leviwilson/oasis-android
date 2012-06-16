@@ -23,7 +23,7 @@ import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.matchers.StartedServiceMatcher;
 
 @RunWith(OasisTestRunner.class)
-public class PodcastServiceConnectionTest {
+public class PodcastServiceConnectorTest {
 	
 	private PodcastServiceConnector player;
 	
