@@ -39,4 +39,8 @@ public class PodcastServiceConnector {
 		return service;
 	}
 
+	public void setOnPlayerConnected(OnPlayerConnectedListener listener) {
+		serviceConnection.setOnPlayerConnected(listener);
+	}
+
 }

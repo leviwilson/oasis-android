@@ -1,5 +1,6 @@
 package com.oasisgranger.media;
 
+import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -65,6 +66,32 @@ public class PodcastServiceConnectorTest {
 		verify(context).bindService(any(Intent.class), connectArg.capture(), anyInt());
 		
 		verify(context).unbindService(connectArg.getValue());
+	}
+	
+	@Test
+	public void itKnowsWhenThePlayerIsConnected() {
+		final TestOnPlayerConnected listener = new TestOnPlayerConnected();
+		final PlayerBinding playerBinding = new NullPlayerBinding();
+		player.setOnPlayerConnected(listener);
+		
+		serviceConnection.onServiceConnected(null, playerBinding);
+		
+		assertThat(listener.getPlayer(), sameInstance(playerBinding));
+	}
+	
+	private final class TestOnPlayerConnected extends OnPlayerConnectedListener {
+
+		private PlayerBinding player;
+
+		@Override
+		public void onConnected(PlayerBinding player) {
+			this.player = player;
+		}
+		
+		public PlayerBinding getPlayer() {
+			return this.player;
+		}
+		
 	}
 	
 }
