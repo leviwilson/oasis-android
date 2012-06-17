@@ -48,4 +48,20 @@ public class ViewHelper {
 		return textView.getText().toString();
 	}
 
+	public static boolean isEnabled(final Activity activity, int id) {
+		return activity.findViewById(id).isEnabled();
+	}
+
+	public static boolean isEnabled(final View view, int id) {
+		return view.findViewById(id).isEnabled();
+	}
+
+	public static void enable(final Activity activity, int id) {
+		activity.findViewById(id).setEnabled(true);
+	}
+
+	public static void enable(final View view, int id) {
+		view.findViewById(id).setEnabled(true);
+	}
+
 }
