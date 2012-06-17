@@ -92,6 +92,16 @@ public class PlayerBindingTest {
 		assertThat(listener.getPlayer(), sameInstance(playerBinding));
 	}
 	
+	@Test
+	public void itSignalsLateComersThatPlaybackHasAlreadyCommenced() {
+		playerBinding.onPrepared(mediaPlayer);
+		
+		final TestOnInitialPlayback listener = new TestOnInitialPlayback();
+		playerBinding.setOnInitialPlaybackListener(listener);
+		
+		assertThat(listener.getPlayer(), sameInstance(playerBinding));
+	}
+	
 	private final class TestOnInitialPlayback extends OnInitialPlaybackListener {
 
 		private PlayerBinding player;

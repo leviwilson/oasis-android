@@ -57,6 +57,10 @@ public class PlayerBinding extends Binder implements OnPreparedListener {
 	
 	public void setOnInitialPlaybackListener(final OnInitialPlaybackListener listener) {
 		onInitialPlayback = listener;
+		
+		if( isPrepared ) {
+			signalOnInitialPlayback();
+		}
 	}
 
 	private void signalOnInitialPlayback() {
