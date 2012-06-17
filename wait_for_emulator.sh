@@ -3,6 +3,6 @@ do
   echo "waiting for emulator..."
   sleep 10
 done
-echo "emulator ready.  waiting another minute because emulators are fickle beasts..."
-sleep 60
+echo "emulator ready.  waiting a sec because emulators are fickle beasts..."
+sleep 30
 echo "Ready to roll"
