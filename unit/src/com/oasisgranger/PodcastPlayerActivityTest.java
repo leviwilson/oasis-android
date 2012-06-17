@@ -1,10 +1,12 @@
 package com.oasisgranger;
 
 import static com.oasisgranger.helpers.ViewHelper.clickOn;
+import static com.oasisgranger.helpers.ViewHelper.isEnabled;
 import static com.oasisgranger.helpers.ViewHelper.textOf;
 import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -17,6 +19,7 @@ import org.mockito.Mock;
 import android.content.Intent;
 
 import com.oasisgranger.R.id;
+import com.oasisgranger.media.OnInitialPlaybackListener;
 import com.oasisgranger.media.OnPlayerConnectedListener;
 import com.oasisgranger.media.PlayerBinding;
 import com.oasisgranger.media.PodcastServiceConnector;
@@ -46,6 +49,28 @@ public class PodcastPlayerActivityTest {
 	}
 	
 	@Test
+	public void controlsAreDisabledByDefault() {
+		startActivity();
+		assertThat(isEnabled(activity, id.play_or_pause), is(false));
+		assertThat(isEnabled(activity, id.stop), is(false));
+	}
+	
+	@Test
+	public void itCaresAboutPlaybackAfterConnecting() {
+		startActivity();
+		verify(player).setOnInitialPlaybackListener((OnInitialPlaybackListener)anyObject());
+	}
+	
+	@Test
+	public void controlsAreEnabledAfterPlaybackStarts() {
+		startActivity();
+		playbackHasStarted();
+		
+		assertThat(isEnabled(activity, id.play_or_pause), is(true));
+		assertThat(isEnabled(activity, id.stop), is(true));
+	}
+	
+	@Test
 	public void itInitiallyPlaysThePodast() {
 		startActivity();
 		verify(serviceConnector).connectWith(podcast);
@@ -70,6 +95,7 @@ public class PodcastPlayerActivityTest {
 	public void pauseIsDisplayedIfPlaying() {
 		appearAsPlaying();
 		startActivity();
+		playbackHasStarted();
 		
 		assertThat(textOf(activity, id.play_or_pause), is("Pause"));
 	}
@@ -78,6 +104,7 @@ public class PodcastPlayerActivityTest {
 	public void playIsDisplayedIfNotPlaying() {
 		appearAsPaused();
 		startActivity();
+		playbackHasStarted();
 		
 		assertThat(textOf(activity, id.play_or_pause), is("Play"));
 	}
@@ -137,6 +164,13 @@ public class PodcastPlayerActivityTest {
 		ArgumentCaptor<OnPlayerConnectedListener> listenerArg = ArgumentCaptor.forClass(OnPlayerConnectedListener.class);
 		verify(serviceConnector).setOnPlayerConnected(listenerArg.capture());
 		listenerArg.getValue().onConnected(player);
+	}
+
+	private void playbackHasStarted() {
+		ArgumentCaptor<OnInitialPlaybackListener> listenerArg = ArgumentCaptor.forClass(OnInitialPlaybackListener.class);
+		verify(player).setOnInitialPlaybackListener(listenerArg.capture());
+		
+		listenerArg.getValue().onInitialPlayback(player);
 	}
 
 }
