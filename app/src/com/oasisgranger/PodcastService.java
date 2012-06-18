@@ -12,6 +12,7 @@ import android.util.Log;
 import com.google.inject.Inject;
 import com.oasisgranger.R.drawable;
 import com.oasisgranger.R.id;
+import com.oasisgranger.R.string;
 import com.oasisgranger.media.PlayerBinding;
 import com.oasisgranger.media.StopServiceWhenComplete;
 import com.oasisgranger.models.Podcast;
@@ -44,7 +45,7 @@ public class PodcastService extends OasisService {
 		notification.tickerText = podcast.getTitle();
 		notification.icon = drawable.ic_home;
 		notification.flags |= Notification.FLAG_ONGOING_EVENT;
-		notification.setLatestEventInfo(getApplicationContext(), "Oasis Granger Podcast", podcast.getTitle(), pendingIntent);
+		notification.setLatestEventInfo(getApplicationContext(), getString(string.podcast_notification_title), podcast.getTitle(), pendingIntent);
 		return notification;
 	}
 

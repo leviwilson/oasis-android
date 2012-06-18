@@ -9,5 +9,6 @@
     <string name="menu_item_share">Share</string>
     <string name="stop">Stop</string>
     <string name="play">Play</string>
+    <string name="podcast_notification_title">Oasis Granger Podcast</string>
 
 </resources>
