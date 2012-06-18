@@ -81,6 +81,7 @@ public class PodcastPlayerActivity extends OasisActivity {
 		@Override
 		public void onClick(View v) {
 			getPlayer().stop();
+			finish();
 		}
 	}
 

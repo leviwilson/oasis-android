@@ -85,6 +85,13 @@ public class PodcastPlayerActivityTest {
 	}
 	
 	@Test
+	public void thereIsNoReasonToStickAroundIfStopped() {
+		startActivity();
+		clickOn(activity, id.stop);
+		assertThat(activity.isFinishing(), is(true));
+	}
+	
+	@Test
 	public void itDisconnectsWhenItDoesNotCareAnymore() {
 		startActivity();
 		
