@@ -7,7 +7,6 @@ import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -78,6 +77,14 @@ public class PodcastPlayerActivityTest {
 	}
 	
 	@Test
+	public void itDisconnectsWhenItDoesNotCareAnymore() {
+		startActivity();
+		
+		activity.onStop();
+		verify(serviceConnector).disconnect();
+	}
+	
+	@Test
 	public void itCanStopThePodcast() {
 		startActivity();
 		clickOn(activity, id.stop);
@@ -89,14 +96,6 @@ public class PodcastPlayerActivityTest {
 		startActivity();
 		clickOn(activity, id.stop);
 		assertThat(activity.isFinishing(), is(true));
-	}
-	
-	@Test
-	public void itDisconnectsWhenItDoesNotCareAnymore() {
-		startActivity();
-		
-		activity.onStop();
-		verify(serviceConnector).disconnect();
 	}
 	
 	@Test
@@ -138,16 +137,6 @@ public class PodcastPlayerActivityTest {
 		appearAsPaused();
 		clickOn(activity, id.play_or_pause);
 		assertThat(textOf(activity, id.play_or_pause), is("Play"));
-	}
-	
-	@Test
-	public void itCanHandleWhenUnbindIsActingFunny() {
-		startActivity();
-		
-		doThrow(new IllegalArgumentException())
-			.when(serviceConnector).disconnect();
-		
-		shadowOf(activity).recreate();
 	}
 
 	private void startActivity() {

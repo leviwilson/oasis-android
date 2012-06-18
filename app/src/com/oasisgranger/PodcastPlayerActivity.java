@@ -29,12 +29,17 @@ public class PodcastPlayerActivity extends OasisActivity {
 		setTitle("");
 
 		setupButtons();
+	}
+	
+	@Override
+	protected void onStart() {
 		serviceConnection.connectWith(thePodcast());
+		super.onStart();
 	}
 
 	@Override
 	public void onStop() {
-		disconnectGracefully();
+		serviceConnection.disconnect();
 		super.onStop();
 	}
 
@@ -58,14 +63,6 @@ public class PodcastPlayerActivity extends OasisActivity {
 			playPauseButton.setText("Pause");
 		} else {
 			playPauseButton.setText("Play");
-		}
-	}
-
-	private void disconnectGracefully() {
-		try {
-			serviceConnection.disconnect();
-		} catch (final IllegalArgumentException e) {
-			// eat it
 		}
 	}
 
