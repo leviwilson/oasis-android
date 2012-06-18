@@ -34,7 +34,7 @@ public class PodcastPlayerActivity extends OasisActivity {
 
 	@Override
 	public void onStop() {
-		serviceConnection.disconnect();
+		disconnectGracefully();
 		super.onStop();
 	}
 
@@ -58,6 +58,14 @@ public class PodcastPlayerActivity extends OasisActivity {
 			playPauseButton.setText("Pause");
 		} else {
 			playPauseButton.setText("Play");
+		}
+	}
+
+	private void disconnectGracefully() {
+		try {
+			serviceConnection.disconnect();
+		} catch (final IllegalArgumentException e) {
+			// eat it
 		}
 	}
 
