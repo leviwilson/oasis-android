@@ -2,8 +2,11 @@ package com.oasisgranger;
 
 import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
+
+import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,16 +14,19 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Spy;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
 
+import com.oasisgranger.R.drawable;
 import com.oasisgranger.media.PlayerBinding;
 import com.oasisgranger.models.Podcast;
 import com.oasisgranger.test.OasisTestRunner;
 import com.xtremelabs.robolectric.Robolectric;
+import com.xtremelabs.robolectric.shadows.ShadowNotification.LatestEventInfo;
 
 @RunWith(OasisTestRunner.class)
 public class PodcastServiceTest {
@@ -96,6 +102,77 @@ public class PodcastServiceTest {
 		assertThat(shadowOf(podcastService).isStoppedBySelf(), is(true));
 	}
 	
+	@Test
+	public void itPlaysInTheForeground() {
+		podcastService.onBind(podcastIntent());
+		assertThat(shadowOf(podcastService).getLastForegroundNotification(), is(notNullValue()));
+	}
+	
+	@Test
+	public void itFlashesWhatIsPlayingInitially() {
+		final Podcast podcast = new Podcast("Some Title", new Date());
+		podcastService.onBind(podcastIntentWith(podcast));
+		
+		final Notification notification = shadowOf(podcastService).getLastForegroundNotification();
+		assertThat(notification.tickerText.toString(), is("Some Title"));
+	}
+	
+	@Test
+	public void itShowsTheOasisLogoForTheNotification() {
+		podcastService.onBind(podcastIntent());
+		
+		final Notification notification = shadowOf(podcastService).getLastForegroundNotification();
+		assertThat(notification.icon, is(drawable.ic_home));
+	}
+	
+	@Test
+	public void itIndicatesThatItIsAnOngoingEvent() {
+		podcastService.onBind(podcastIntent());
+		
+		final Notification notification = shadowOf(podcastService).getLastForegroundNotification();
+		assertThat(notification.flags, is(Notification.FLAG_ONGOING_EVENT));
+	}
+	
+	@Test
+	public void theNotificationShowsItIsAnOasisPodcastPlaying() {
+		podcastService.onBind(podcastIntent());
+		
+		final LatestEventInfo eventInfo = getLastEventInfo();
+		
+		assertThat(eventInfo.getContentTitle().toString(), is("Oasis Granger Podcast"));
+	}
+	
+	@Test
+	public void theNotificationShowsTheCurrentPodcastTitle() {
+		final Podcast podcast = new Podcast("The Podcast Title", new Date());
+		podcastService.onBind(podcastIntentWith(podcast));
+		
+		final LatestEventInfo eventInfo = getLastEventInfo();
+		
+		assertThat(eventInfo.getContentText().toString(), is("The Podcast Title"));
+	}
+	
+	@Test
+	public void theNotificationSendsYouToThePodcastPlayer() {
+		podcastService.onBind(podcastIntent());
+		
+		final Intent savedIntent = getPendingActivity();
+		assertThat(savedIntent.getComponent().getClassName(), is(PodcastPlayerActivity.class.getName()));
+	}
+	
+	@Test
+	public void theNotificationCanSendYouFromOutsideOfTheApplication() {
+		podcastService.onBind(podcastIntent());
+		
+		final Intent savedIntent = getPendingActivity();
+		assertThat(savedIntent.getFlags(), is(Intent.FLAG_ACTIVITY_NEW_TASK));
+	}
+	
+	@Test
+	public void theNotificationsPendingIntentCanBeUpdated() {
+		podcastService.onBind(podcastIntent());
+	}
+	
 	private Intent podcastIntent() {
 		Podcast podcast = new Podcast();
 		podcast.setMediaUrl("");
@@ -106,6 +183,18 @@ public class PodcastServiceTest {
 		Intent podcastIntent = new Intent();
 		podcastIntent.putExtra(Podcast.class.getName(), podcast);
 		return podcastIntent;
+	}
+
+	private LatestEventInfo getLastEventInfo() {
+		final Notification notification = shadowOf(podcastService).getLastForegroundNotification();
+		return shadowOf(notification).getLatestEventInfo();
+	}
+
+	private Intent getPendingActivity() {
+		final LatestEventInfo eventInfo = getLastEventInfo();
+		
+		final Intent savedIntent = shadowOf(eventInfo.getContentIntent()).getSavedIntent();
+		return savedIntent;
 	}
 
 }
