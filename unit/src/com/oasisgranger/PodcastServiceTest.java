@@ -161,11 +161,19 @@ public class PodcastServiceTest {
 	}
 	
 	@Test
+	public void theNotificationWillReuseThePodcasePlayerIfItCan() {
+		podcastService.onBind(podcastIntent());
+		
+		final Intent savedIntent = getPendingActivity();
+		assertThat(savedIntent.getFlags() & Intent.FLAG_ACTIVITY_REORDER_TO_FRONT, is(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+	}
+	
+	@Test
 	public void theNotificationCanSendYouFromOutsideOfTheApplication() {
 		podcastService.onBind(podcastIntent());
 		
 		final Intent savedIntent = getPendingActivity();
-		assertThat(savedIntent.getFlags(), is(Intent.FLAG_ACTIVITY_NEW_TASK));
+		assertThat(savedIntent.getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK, is(Intent.FLAG_ACTIVITY_NEW_TASK));
 	}
 	
 	@Test
