@@ -56,6 +56,7 @@ public class PodcastService extends OasisService {
 	private Intent sendTo(Class<? extends Activity> theActivity) {
 		Intent intent = new Intent(getApplicationContext(), theActivity);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		return intent;
 	}
