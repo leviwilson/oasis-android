@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 
 import com.oasisgranger.PodcastService;
@@ -100,6 +101,31 @@ public class PlayerBindingTest {
 		playerBinding.setOnInitialPlaybackListener(listener);
 		
 		assertThat(listener.getPlayer(), sameInstance(playerBinding));
+	}
+	
+	@Test
+	public void itStopsPlayingIfWeLoseAudioFocus() {
+		playerBinding.onAudioFocusChange(AudioManager.AUDIOFOCUS_LOSS);
+		verify(mediaPlayer).stop();
+	}
+	
+	@Test
+	public void itResumesPlaybackWhenGainingBackTheFocus() {
+		playerBinding.onAudioFocusChange(AudioManager.AUDIOFOCUS_GAIN);
+		verify(mediaPlayer).start();
+		verify(mediaPlayer).setVolume(1.0f, 1.0f);
+	}
+	
+	@Test
+	public void itPausesIfWeShouldGetTheAudioBackSoon() {
+		playerBinding.onAudioFocusChange(AudioManager.AUDIOFOCUS_LOSS_TRANSIENT);
+		verify(mediaPlayer).pause();
+	}
+	
+	@Test
+	public void itQuietsForNotificationsAndSuch() {
+		playerBinding.onAudioFocusChange(AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK);
+		verify(mediaPlayer).setVolume(0.1f, 0.1f);
 	}
 	
 	private final class TestOnInitialPlayback extends OnInitialPlaybackListener {
