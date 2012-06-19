@@ -13,6 +13,7 @@ import com.google.inject.Inject;
 import com.oasisgranger.R.drawable;
 import com.oasisgranger.R.id;
 import com.oasisgranger.R.string;
+import com.oasisgranger.media.AudioManagement;
 import com.oasisgranger.media.PlayerBinding;
 import com.oasisgranger.media.StopServiceWhenComplete;
 import com.oasisgranger.models.Podcast;
@@ -20,12 +21,15 @@ import com.oasisgranger.models.Podcast;
 public class PodcastService extends OasisService {
 
 	@Inject private MediaPlayer mediaPlayer;
+	@Inject private AudioManagement audioManagement;
 
 	@Override
 	public IBinder onBind(Intent podcastIntent) {
 		final Podcast podcast = getPodcast(podcastIntent);
 
 		final PlayerBinding player = initializePlayer();
+		
+		audioManagement.requestAudioFocus(player, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 		prepareAudioFor(podcast);
 		
 		startForeground(id.background_podcast, buildNotificationFor(podcast));

@@ -8,6 +8,7 @@ import com.google.inject.Provides;
 import com.oasisgranger.DialogFacade;
 import com.oasisgranger.OasisPodcasts;
 import com.oasisgranger.Requestor;
+import com.oasisgranger.media.AudioManagement;
 import com.oasisgranger.media.PodcastServiceConnector;
 import com.oasisgranger.media.PodcastServiceConnection;
 import com.oasisgranger.task.AsyncTaskRunner;
@@ -28,6 +29,7 @@ public class OasisModule extends AbstractModule {
 	}
 
 	private void bindProduction() {
+		bind(AudioManagement.class);
 		bind(DialogFacade.class).to(DialogFactory.class);
 		bind(MediaPlayer.class);
 		bind(PodcastServiceConnector.class);

@@ -4,6 +4,8 @@ import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 import java.util.Date;
@@ -12,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.Spy;
 
 import android.app.Notification;
@@ -22,6 +25,7 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
 
 import com.oasisgranger.R.drawable;
+import com.oasisgranger.media.AudioManagement;
 import com.oasisgranger.media.PlayerBinding;
 import com.oasisgranger.models.Podcast;
 import com.oasisgranger.test.OasisTestRunner;
@@ -34,6 +38,7 @@ public class PodcastServiceTest {
 	private PodcastService podcastService;
 	
 	@Spy MediaPlayer mediaPlayer;
+	@Mock AudioManagement audioManagement;
 
 	private OasisGrangerApp application;
 
@@ -41,6 +46,7 @@ public class PodcastServiceTest {
 	public void setUp() {
 		application = (OasisGrangerApp) Robolectric.application;
 		application.configure()
+			.withBinding(AudioManagement.class, audioManagement)
 			.withBinding(MediaPlayer.class, mediaPlayer);
 		podcastService = new PodcastService();
 		podcastService.onCreate();
@@ -61,6 +67,12 @@ public class PodcastServiceTest {
 		podcastService.onBind(podcastIntent());
 		
 		verify(mediaPlayer).setAudioStreamType(AudioManager.STREAM_MUSIC);
+	}
+	
+	@Test
+	public void politelyRequestTheAudioFocus() {
+		podcastService.onBind(podcastIntent());
+		verify(audioManagement).requestAudioFocus(any(PlayerBinding.class), eq(AudioManager.STREAM_MUSIC), eq(AudioManager.AUDIOFOCUS_GAIN));
 	}
 	
 	@Test
