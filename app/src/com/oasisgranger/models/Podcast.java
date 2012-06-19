@@ -36,6 +36,7 @@ public class Podcast implements Parcelable {
 		contentSnippet = source.readString();
 		link = source.readString();
 		mediaUrl = source.readString();
+		publishedDate = new Date(source.readLong());
 	}
 
 	public void writeToParcel(Parcel dest, int flags) {
@@ -43,6 +44,7 @@ public class Podcast implements Parcelable {
 		dest.writeString(contentSnippet);
 		dest.writeString(link);
 		dest.writeString(getMediaUrl());
+		dest.writeLong(publishedDate.getTime());
 	}
 
 	public int describeContents() {

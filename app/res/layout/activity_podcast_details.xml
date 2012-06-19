@@ -9,10 +9,17 @@
         android:id="@+id/podcast_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10sp"
         android:layout_marginTop="10sp"
         android:textColor="@color/dark"
         android:textSize="@dimen/text_large" />
+
+    <TextView
+        android:id="@+id/podcast_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10sp"
+        android:textColor="@color/medium_gray"
+        android:textSize="@dimen/text_micro" />
 
     <TextView
         android:id="@+id/podcast_description"

@@ -6,6 +6,9 @@ import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +39,14 @@ public class PodcastDetailsTest {
 		startActivity();
 
 		assertThat(textOf(activity, id.podcast_title), is("Sermon Title"));
+	}
+	
+	@Test
+	public void itDisplaysThePodcastDate() throws ParseException {
+		podcast.publishedDate = new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2012");
+		startActivity();
+		
+		assertThat(textOf(activity, id.podcast_date), is("1/1/2012"));
 	}
 
 	@Test
