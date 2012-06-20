@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.flurry.android.FlurryAgent;
 import com.oasisgranger.R.id;
 
 public class OasisActivity extends com.google.actionbar.ActionBarActivity {
@@ -16,6 +17,18 @@ public class OasisActivity extends com.google.actionbar.ActionBarActivity {
 		super.onCreate(savedInstanceState);
 
 		getOasisApplication().injectInto(this);
+	}
+	
+	@Override
+	protected void onStart() {
+		FlurryAgent.onStartSession(this, "PC5R3F37ZKF32SWCHJD9");
+		super.onStart();
+	}
+	
+	@Override
+	protected void onStop() {
+		FlurryAgent.onEndSession(this);
+		super.onStop();
 	}
 	
 	@SuppressWarnings("deprecation")
