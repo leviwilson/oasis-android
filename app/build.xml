@@ -53,6 +53,7 @@
     </path>
 
     <path id="classpath.test">
+      <pathelement location="../app/libs/FlurryAgent.jar" />
       <pathelement location="../app/libs/guice-3.0-no_aop.jar" />
       <pathelement location="../app/libs/gson-2.0.jar" />
       <pathelement location="../app/libs/javax.inject.jar" />
