@@ -7,10 +7,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.flurry.android.FlurryAgent;
+import com.google.inject.Inject;
 import com.oasisgranger.R.id;
+import com.oasisgranger.logging.FlurryLogger;
 
 public class OasisActivity extends com.google.actionbar.ActionBarActivity {
+	
+	@Inject
+	private FlurryLogger flurryLogger;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +25,13 @@ public class OasisActivity extends com.google.actionbar.ActionBarActivity {
 	
 	@Override
 	protected void onStart() {
-		FlurryAgent.onStartSession(this, "PC5R3F37ZKF32SWCHJD9");
+		flurryLogger.startSession(this);
 		super.onStart();
 	}
 	
 	@Override
 	protected void onStop() {
-		FlurryAgent.onEndSession(this);
+		flurryLogger.endSession();
 		super.onStop();
 	}
 	
