@@ -51,6 +51,12 @@
         <equals arg1="0" arg2="${integration.result}" />
       </condition>
     </fail>
+    <exec executable="calabash-android" dir="./cukes" failonerror="true">
+      <arg value="build" />
+    </exec>
+    <exec executable="calabash-android" dir="./cukes" failonerror="true">
+      <arg value="run" />
+    </exec>
   </target>
 
 </project>
