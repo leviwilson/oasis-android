@@ -12,6 +12,7 @@ gen/
 tmp/*
 .metadata
 .project
+.settings
 local.properties
 coverage.em
 app/junit*.properties
