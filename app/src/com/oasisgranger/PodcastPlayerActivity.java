@@ -3,7 +3,6 @@ package com.oasisgranger;
 import static com.oasisgranger.helpers.ViewHelper.enable;
 import static com.oasisgranger.helpers.ViewHelper.findFor;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -32,7 +31,7 @@ public class PodcastPlayerActivity extends OasisActivity {
 		setContentView(layout.activity_podcast_player);
 		setTitle("");
 		
-		chronometer = findFor(PodcastPlayerActivity.this, id.elapsed_time);
+		chronometer = findFor(this, id.elapsed_time);
 		setupButtons();
 	}
 	
@@ -66,12 +65,20 @@ public class PodcastPlayerActivity extends OasisActivity {
 	private void updatePlayState() {
 		if (getPlayer().isPlaying()) {
 			playPauseButton.setText("Pause");
-			chronometer.setBase(SystemClock.elapsedRealtime() - getPlayer().getElapsedTime());
-			chronometer.start();
+			startTimer();
 		} else {
 			playPauseButton.setText("Play");
-			chronometer.stop();
+			stopTimer();
 		}
+	}
+
+	private void startTimer() {
+		chronometer.setBase(getPlayer().getElapsedRealTime());
+		chronometer.start();
+	}
+
+	private void stopTimer() {
+		chronometer.stop();
 	}
 
 	private final class OnPlayerConnected extends OnPlayerConnectedListener {

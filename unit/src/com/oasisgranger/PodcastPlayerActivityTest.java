@@ -161,13 +161,12 @@ public class PodcastPlayerActivityTest {
 	
 	@Test
 	public void theElapsedTimeOfThePodcastDrivesTheBaseTimer() {
-		player.elapsedTimeIs(TimeUnit.SECONDS.toMillis(3));
+		player.setElapsedRealTime(TimeUnit.SECONDS.toMillis(3));
 		startActivity();
 		appearAsPlaying();
 		playbackHasStarted();
 		
-		// elapsedRealTime() - 3000 milliseconds
-		assertThat(elapsedChronometer().initialElapsed(), is(-3000L));
+		assertThat(elapsedChronometer().initialElapsed(), is(3000L));
 	}
 	
 	@Test
@@ -248,7 +247,7 @@ public class PodcastPlayerActivityTest {
 			return isPlaying;
 		}
 		
-		public void elapsedTimeIs(long millis) {
+		public void setElapsedRealTime(long millis) {
 			elapsedTimeMillis = millis;
 		}
 
@@ -268,7 +267,7 @@ public class PodcastPlayerActivityTest {
 		}
 		
 		@Override
-		public long getElapsedTime() {
+		public long getElapsedRealTime() {
 			return elapsedTimeMillis;
 		}
 	}

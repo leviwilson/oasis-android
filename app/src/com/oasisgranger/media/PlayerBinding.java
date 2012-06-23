@@ -5,6 +5,7 @@ import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Binder;
+import android.os.SystemClock;
 
 import com.oasisgranger.PodcastService;
 
@@ -51,8 +52,8 @@ public class PlayerBinding extends Binder implements OnPreparedListener,
 		return isPrepared && mediaPlayer.isPlaying();
 	}
 	
-	public long getElapsedTime() {
-		return mediaPlayer.getCurrentPosition();
+	public long getElapsedRealTime() {
+		return SystemClock.elapsedRealtime() - mediaPlayer.getCurrentPosition();
 	}
 
 	@Override
