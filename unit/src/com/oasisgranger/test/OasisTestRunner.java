@@ -1,5 +1,7 @@
 package com.oasisgranger.test;
 
+import static com.xtremelabs.robolectric.Robolectric.bindShadowClass;
+
 import java.io.File;
 
 import org.junit.runners.model.InitializationError;
@@ -10,6 +12,7 @@ import android.content.Context;
 
 import com.oasisgranger.OasisGrangerApp;
 import com.oasisgranger.task.TaskRunner;
+import com.oasisgranger.test.shadows.ShadowChronometer;
 import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 
@@ -17,6 +20,11 @@ public class OasisTestRunner extends RobolectricTestRunner {
 
 	public OasisTestRunner(Class<?> testClass) throws InitializationError {
 		super(testClass, new File("../app"));
+	}
+	
+	@Override
+	protected void bindShadowClasses() {
+		bindShadowClass(ShadowChronometer.class);
 	}
 	
 	@Override

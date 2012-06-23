@@ -1,10 +1,13 @@
 package com.oasisgranger;
 
 import static com.oasisgranger.helpers.ViewHelper.clickOn;
+import static com.oasisgranger.helpers.ViewHelper.findFor;
 import static com.oasisgranger.helpers.ViewHelper.isEnabled;
 import static com.oasisgranger.helpers.ViewHelper.textOf;
 import static com.xtremelabs.robolectric.Robolectric.shadowOf;
+import static com.xtremelabs.robolectric.Robolectric.shadowOf_;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.verify;
@@ -15,8 +18,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.Spy;
 
 import android.content.Intent;
+import android.widget.Chronometer;
 
 import com.oasisgranger.R.id;
 import com.oasisgranger.media.OnInitialPlaybackListener;
@@ -25,13 +30,14 @@ import com.oasisgranger.media.PlayerBinding;
 import com.oasisgranger.media.PodcastServiceConnector;
 import com.oasisgranger.models.Podcast;
 import com.oasisgranger.test.OasisTestRunner;
+import com.oasisgranger.test.shadows.ShadowChronometer;
 import com.xtremelabs.robolectric.Robolectric;
 
 @RunWith(OasisTestRunner.class)
 public class PodcastPlayerActivityTest {
 	
 	@Mock PodcastServiceConnector serviceConnector;
-	@Mock PlayerBinding player;
+	@Spy PlayerBindingStub player = new PlayerBindingStub();
 	
 	private PodcastPlayerActivity activity;
 	private Podcast podcast;
@@ -130,13 +136,47 @@ public class PodcastPlayerActivityTest {
 	public void audioStateIsCorrectWhenToggling() {
 		startActivity();
 		
-		appearAsPlaying();
 		clickOn(activity, id.play_or_pause);
 		assertThat(textOf(activity, id.play_or_pause), is("Pause"));
 		
-		appearAsPaused();
 		clickOn(activity, id.play_or_pause);
 		assertThat(textOf(activity, id.play_or_pause), is("Play"));
+	}
+	
+	@Test
+	public void theElapsedTimerDoesNotStartAutomatically() {
+		startActivity();
+		assertThat(elapsedChronometer().wasStarted(), is(not(true)));
+	}
+	
+	@Test
+	public void itElapsesTimeAsThePodcastStartsPlaying() {
+		startActivity();
+		appearAsPlaying();
+		playbackHasStarted();
+		assertThat(elapsedChronometer().wasStarted(), is(true));
+	}
+	
+	@Test
+	public void itStopsElapsingWhenPaused() {
+		startActivity();
+		playbackHasStarted();
+		
+		clickOn(activity, id.play_or_pause);
+		
+		assertThat(elapsedChronometer().wasStopped(), is(true));
+	}
+	
+	@Test
+	public void itStartsElapsingAgainWhenResuming() {
+		startActivity();
+		playbackHasStarted();
+		appearAsPaused();
+		elapsedChronometer().reset();
+		
+		clickOn(activity, id.play_or_pause);
+		
+		assertThat(elapsedChronometer().wasStarted(), is(true));
 	}
 
 	private void startActivity() {
@@ -160,11 +200,11 @@ public class PodcastPlayerActivityTest {
 	}
 
 	private void appearAsPlaying() {
-		when(player.isPlaying()).thenReturn(true);
+		player.isPlaying = true;
 	}
 
 	private void appearAsPaused() {
-		when(player.isPlaying()).thenReturn(false);
+		player.isPlaying = false;
 	}
 
 	private void beConnected() {
@@ -178,6 +218,36 @@ public class PodcastPlayerActivityTest {
 		verify(player).setOnInitialPlaybackListener(listenerArg.capture());
 		
 		listenerArg.getValue().onInitialPlayback(player);
+	}
+
+	private ShadowChronometer elapsedChronometer() {
+		final Chronometer elapsedTimer = findFor(activity, id.elapsed_time);
+		ShadowChronometer shadowOf = shadowOf_(elapsedTimer);
+		return shadowOf;
+	}
+	
+	private class PlayerBindingStub extends PlayerBinding {
+		private boolean isPlaying;
+
+		@Override
+		public boolean isPlaying() {
+			return isPlaying;
+		}
+		
+		@Override
+		public void play() {
+			isPlaying = true;
+		}
+		
+		@Override
+		public void stop() {
+			isPlaying = false;
+		}
+		
+		@Override
+		public void pause() {
+			isPlaying = false;
+		}
 	}
 
 }

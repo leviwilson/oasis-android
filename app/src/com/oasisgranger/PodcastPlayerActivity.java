@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Chronometer;
 
 import com.google.inject.Inject;
 import com.oasisgranger.R.id;
@@ -22,12 +23,15 @@ public class PodcastPlayerActivity extends OasisActivity {
 	
 	private Button playPauseButton;
 
+	private Chronometer chronometer;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(layout.activity_podcast_player);
 		setTitle("");
-
+		
+		chronometer = findFor(PodcastPlayerActivity.this, id.elapsed_time);
 		setupButtons();
 	}
 	
@@ -61,8 +65,10 @@ public class PodcastPlayerActivity extends OasisActivity {
 	private void updatePlayState() {
 		if (getPlayer().isPlaying()) {
 			playPauseButton.setText("Pause");
+			chronometer.start();
 		} else {
 			playPauseButton.setText("Play");
+			chronometer.stop();
 		}
 	}
 
