@@ -3,6 +3,7 @@ package com.oasisgranger;
 import static com.oasisgranger.helpers.ViewHelper.enable;
 import static com.oasisgranger.helpers.ViewHelper.findFor;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -65,6 +66,7 @@ public class PodcastPlayerActivity extends OasisActivity {
 	private void updatePlayState() {
 		if (getPlayer().isPlaying()) {
 			playPauseButton.setText("Pause");
+			chronometer.setBase(SystemClock.elapsedRealtime() - getPlayer().getElapsedTime());
 			chronometer.start();
 		} else {
 			playPauseButton.setText("Play");

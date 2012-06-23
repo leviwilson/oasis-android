@@ -50,6 +50,10 @@ public class PlayerBinding extends Binder implements OnPreparedListener,
 	public boolean isPlaying() {
 		return isPrepared && mediaPlayer.isPlaying();
 	}
+	
+	public long getElapsedTime() {
+		return mediaPlayer.getCurrentPosition();
+	}
 
 	@Override
 	public void onPrepared(MediaPlayer mp) {

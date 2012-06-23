@@ -13,6 +13,8 @@ import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -158,6 +160,17 @@ public class PodcastPlayerActivityTest {
 	}
 	
 	@Test
+	public void theElapsedTimeOfThePodcastDrivesTheBaseTimer() {
+		player.elapsedTimeIs(TimeUnit.SECONDS.toMillis(3));
+		startActivity();
+		appearAsPlaying();
+		playbackHasStarted();
+		
+		// elapsedRealTime() - 3000 milliseconds
+		assertThat(elapsedChronometer().initialElapsed(), is(-3000L));
+	}
+	
+	@Test
 	public void itStopsElapsingWhenPaused() {
 		startActivity();
 		playbackHasStarted();
@@ -228,12 +241,17 @@ public class PodcastPlayerActivityTest {
 	
 	private class PlayerBindingStub extends PlayerBinding {
 		private boolean isPlaying;
+		private long elapsedTimeMillis;
 
 		@Override
 		public boolean isPlaying() {
 			return isPlaying;
 		}
 		
+		public void elapsedTimeIs(long millis) {
+			elapsedTimeMillis = millis;
+		}
+
 		@Override
 		public void play() {
 			isPlaying = true;
@@ -247,6 +265,11 @@ public class PodcastPlayerActivityTest {
 		@Override
 		public void pause() {
 			isPlaying = false;
+		}
+		
+		@Override
+		public long getElapsedTime() {
+			return elapsedTimeMillis;
 		}
 	}
 

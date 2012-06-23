@@ -10,6 +10,7 @@ import com.xtremelabs.robolectric.shadows.ShadowView;
 public class ShadowChronometer extends ShadowView {
 	private boolean wasStarted;
 	private boolean wasStopped;
+	private long initialElapsedMillis;
 	
 	@Implementation
 	public void start() {
@@ -19,6 +20,11 @@ public class ShadowChronometer extends ShadowView {
 	@Implementation
 	public void stop() {
 		wasStopped = true;
+	}
+	
+	@Implementation
+	public void setBase(long millis) {
+		initialElapsedMillis = millis;
 	}
 	
 	public boolean wasStarted() {
@@ -32,5 +38,9 @@ public class ShadowChronometer extends ShadowView {
 	public void reset() {
 		wasStarted = false;
 		wasStopped = false;
+	}
+
+	public long initialElapsed() {
+		return initialElapsedMillis;
 	}
 }
