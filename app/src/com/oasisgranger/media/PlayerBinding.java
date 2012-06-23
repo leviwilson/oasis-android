@@ -1,5 +1,9 @@
 package com.oasisgranger.media;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
@@ -56,6 +60,12 @@ public class PlayerBinding extends Binder implements OnPreparedListener,
 		return SystemClock.elapsedRealtime() - mediaPlayer.getCurrentPosition();
 	}
 
+	public String formatTotalTime(String formatString) {
+		final SimpleDateFormat dateFormat = new SimpleDateFormat(formatString);
+		dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+		return dateFormat.format(new Date(mediaPlayer.getDuration()));
+	}
+
 	@Override
 	public void onPrepared(MediaPlayer mp) {
 		isPrepared = true;
@@ -97,11 +107,6 @@ public class PlayerBinding extends Binder implements OnPreparedListener,
 			mediaPlayer.setVolume(0.1f, 0.1f);
 			break;
 		}
-	}
-
-	public String formatTotalTime(String formatString) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

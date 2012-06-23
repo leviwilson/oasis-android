@@ -6,6 +6,8 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -126,6 +128,17 @@ public class PlayerBindingTest {
 	public void itQuietsForNotificationsAndSuch() {
 		playerBinding.onAudioFocusChange(AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK);
 		verify(mediaPlayer).setVolume(0.1f, 0.1f);
+	}
+	
+	@Test
+	public void itCanFormatTheTotalTime() {
+		final int hourMillis = (int) TimeUnit.HOURS.toMillis(2);
+		final int minuteMillis = (int) TimeUnit.MINUTES.toMillis(42);
+		final int secondMillis = (int) TimeUnit.SECONDS.toMillis(7);
+		when(mediaPlayer.getDuration())
+			.thenReturn(hourMillis + minuteMillis + secondMillis);
+		
+		assertThat(playerBinding.formatTotalTime("HH:mm:ss"), is("02:42:07"));
 	}
 	
 	private final class TestOnInitialPlayback extends OnInitialPlaybackListener {
