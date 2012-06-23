@@ -99,4 +99,9 @@ public class PlayerBinding extends Binder implements OnPreparedListener,
 		}
 	}
 
+	public String formatTotalTime(String formatString) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

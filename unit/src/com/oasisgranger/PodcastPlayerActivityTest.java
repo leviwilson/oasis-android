@@ -146,6 +146,22 @@ public class PodcastPlayerActivityTest {
 	}
 	
 	@Test
+	public void itDisplaysTheTotalPodcastTime() {
+		player.setTotalTimeString("01:03:23");
+		startActivity();
+		playbackHasStarted();
+		
+		assertThat(textOf(activity, id.total_time), is("01:03:23"));
+	}
+	
+	@Test
+	public void itFormatsTheTotalTimeInHHmmss() {
+		startActivity();
+		playbackHasStarted();
+		verify(player).formatTotalTime("HH:mm:ss");
+	}
+	
+	@Test
 	public void theElapsedTimerDoesNotStartAutomatically() {
 		startActivity();
 		assertThat(elapsedChronometer().wasStarted(), is(not(true)));
@@ -241,14 +257,19 @@ public class PodcastPlayerActivityTest {
 	private class PlayerBindingStub extends PlayerBinding {
 		private boolean isPlaying;
 		private long elapsedTimeMillis;
+		private String totalTime;
 
 		@Override
 		public boolean isPlaying() {
 			return isPlaying;
 		}
 		
-		public void setElapsedRealTime(long millis) {
-			elapsedTimeMillis = millis;
+		public void setTotalTimeString(String totalTime) {
+			this.totalTime = totalTime;
+		}
+
+		public void setElapsedRealTime(long elapsedTimeMillis) {
+			this.elapsedTimeMillis = elapsedTimeMillis;
 		}
 
 		@Override
@@ -269,6 +290,11 @@ public class PodcastPlayerActivityTest {
 		@Override
 		public long getElapsedRealTime() {
 			return elapsedTimeMillis;
+		}
+		
+		@Override
+		public String formatTotalTime(final String formatString) {
+			return totalTime;
 		}
 	}
 

@@ -11,6 +11,7 @@ import android.widget.Chronometer;
 import com.google.inject.Inject;
 import com.oasisgranger.R.id;
 import com.oasisgranger.R.layout;
+import com.oasisgranger.helpers.ViewHelper;
 import com.oasisgranger.media.OnInitialPlaybackListener;
 import com.oasisgranger.media.OnPlayerConnectedListener;
 import com.oasisgranger.media.PlayerBinding;
@@ -70,6 +71,8 @@ public class PodcastPlayerActivity extends OasisActivity {
 			playPauseButton.setText("Play");
 			stopTimer();
 		}
+		
+		ViewHelper.setTextFor(this, id.total_time, getPlayer().formatTotalTime("HH:mm:ss"));
 	}
 
 	private void startTimer() {
