@@ -29,7 +29,8 @@ public class PodcastsActivity extends OasisActivity {
 	@Inject TaskRunner taskRunner;
 	
 	ListView listView;
-	LoadPodcastsWork podcastsWork;
+	
+	PodcastData podcastData;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +42,23 @@ public class PodcastsActivity extends OasisActivity {
 		listView = findFor(this, R.id.podcast_list);
 		listView.setOnItemClickListener(new OnPodcastClick());
 
-		podcastsWork = getPodcastsWorkItem();
-		if (null == podcastsWork) {
+		podcastData = getLastPodcastData();
+		if (null == podcastData.getPodcasts()) {
 			loadPodcasts();
+		} else {
+			updateListViewWith(podcastData.getPodcasts());
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
+	private PodcastData getLastPodcastData() {
+		PodcastData lastPodcastData = (PodcastData) getLastNonConfigurationInstance();
+		if( null == lastPodcastData ) {
+			lastPodcastData = new PodcastData();
+		}
+		return lastPodcastData;
+	}
+
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		return dialogFacade.createProgress(this, "Loading...");
@@ -60,8 +72,8 @@ public class PodcastsActivity extends OasisActivity {
 	
 	@Override
 	public Object onRetainNonConfigurationInstance() {
-		podcastsWork.detach();
-		return podcastsWork;
+		podcastData.getPodcastsWork().detach();
+		return podcastData;
 	}
 
 	@Override
@@ -75,19 +87,15 @@ public class PodcastsActivity extends OasisActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	@SuppressWarnings("deprecation")
-	private LoadPodcastsWork getPodcastsWorkItem() {
-		LoadPodcastsWork workItem = (LoadPodcastsWork) getLastNonConfigurationInstance();
-		if( null != podcastsWork ) {
-			workItem.attach(new PodcastsLoadedCallback());
-		}
-		
-		return workItem;
-	}
-
 	private void loadPodcasts() {
 		dialogFacade.show(this, id.progress_loading);
-		taskRunner.run(podcastsWork = new LoadPodcastsWork(new PodcastsLoadedCallback()));
+		podcastData.setPodcastsWork(new LoadPodcastsWork(new PodcastsLoadedCallback()));
+		taskRunner.run(podcastData.getPodcastsWork());
+	}
+
+	private void updateListViewWith(ArrayList<Podcast> podcasts) {
+		PodcastAdapter adapter = new PodcastAdapter(getApplicationContext(), layout.podcast_item, podcasts);
+		listView.setAdapter(adapter);
 	}
 
 	private final class LoadPodcastsWork extends AsyncWorkWithCallback<Void, ArrayList<Podcast>> {
@@ -108,9 +116,9 @@ public class PodcastsActivity extends OasisActivity {
 		}
 
 		@Override
-		public void onPostExecute(ArrayList<Podcast> result) {
-			PodcastAdapter adapter = new PodcastAdapter(getApplicationContext(), layout.podcast_item, result);
-			listView.setAdapter(adapter);
+		public void onPostExecute(ArrayList<Podcast> podcasts) {
+			podcastData.setPodcasts(podcasts);
+			updateListViewWith(podcasts);
 			dialogFacade.dismiss(PodcastsActivity.this, id.progress_loading);
 		}
 	}
@@ -125,6 +133,27 @@ public class PodcastsActivity extends OasisActivity {
 
 		private Podcast podcastAt(int position) {
 			return (Podcast) listView.getItemAtPosition(position);
+		}
+	}
+	
+	private final class PodcastData {
+		private LoadPodcastsWork podcastsWork;
+		private ArrayList<Podcast> podcasts;
+		
+		public LoadPodcastsWork getPodcastsWork() {
+			return podcastsWork;
+		}
+		
+		public void setPodcastsWork(LoadPodcastsWork podcastsWork) {
+			this.podcastsWork = podcastsWork;
+		}
+
+		public ArrayList<Podcast> getPodcasts() {
+			return podcasts;
+		}
+
+		public void setPodcasts(ArrayList<Podcast> podcasts) {
+			this.podcasts = podcasts;
 		}
 	}
 

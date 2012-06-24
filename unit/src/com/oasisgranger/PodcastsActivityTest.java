@@ -49,6 +49,13 @@ public class PodcastsActivityTest {
 	}
 	
 	@Test
+	public void itKeepsThePodcastsAcrossOrientationChange() {
+		startActivity();
+		shadowOf(activity).recreate();
+		assertThat(podcastList().getCount(), is(1));
+	}
+	
+	@Test
 	public void itShowsProgressWhenLoading() {
 		startActivity();
 		verify(dialogFacade).createProgress(activity, "Loading...");
@@ -91,7 +98,7 @@ public class PodcastsActivityTest {
 		assertThat(actualPodcast.getTitle(), is("My Title"));
 		assertThat(actualPodcast.publishedDate, is(expectedDate));
 	}
-
+	
 	private void startActivity() {
 		shadowOf(activity).create();
 	}
