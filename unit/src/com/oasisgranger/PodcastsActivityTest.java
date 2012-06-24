@@ -5,6 +5,7 @@ import static com.oasisgranger.helpers.ViewHelper.textOf;
 import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -15,12 +16,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Spy;
 
 import android.content.Intent;
 import android.view.View;
 import android.widget.ListView;
 
 import com.oasisgranger.R.id;
+import com.oasisgranger.di.DialogFactory;
 import com.oasisgranger.models.Podcast;
 import com.oasisgranger.test.OasisTestRunner;
 import com.xtremelabs.robolectric.Robolectric;
@@ -29,23 +32,26 @@ import com.xtremelabs.robolectric.Robolectric;
 public class PodcastsActivityTest {
 
 	@Mock OasisPodcasts oasisPodcasts;
+	@Spy DialogFacade dialogFacade = new DialogFactory();
 	
 	private PodcastsActivity activity;
 
 	@Before
 	public void setUp() throws Exception {
 		setupMocks();
-
 		activity = new PodcastsActivity();
 	}
 
 	@Test
 	public void itCanLoadPodcasts() {
-		setupToReturn(new Podcast());
 		startActivity();
-
-		final ListView listView = podcastList();
-		assertThat(listView.getCount(), is(1));
+		assertThat(podcastList().getCount(), is(1));
+	}
+	
+	@Test
+	public void itShowsProgressWhenLoading() {
+		startActivity();
+		verify(dialogFacade).showProgressFor(activity, "Loading...");
 	}
 
 	@Test
@@ -86,9 +92,12 @@ public class PodcastsActivityTest {
 
 	private void setupMocks() throws Exception {
 		OasisGrangerApp application = (OasisGrangerApp) Robolectric.application;
-		application.configure().withBinding(OasisPodcasts.class, oasisPodcasts);
+		application.configure()
+			.withBinding(DialogFacade.class, dialogFacade)
+			.withBinding(OasisPodcasts.class, oasisPodcasts);
 		
 		when(oasisPodcasts.load()).thenReturn(new ArrayList<Podcast>());
+		setupToReturn(new Podcast());
 	}
 
 	private ListView podcastList() {
