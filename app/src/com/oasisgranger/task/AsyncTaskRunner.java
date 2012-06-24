@@ -10,6 +10,11 @@ public class AsyncTaskRunner implements TaskRunner {
 		public AsyncWorkItem(WorkItem<Parameter, Result> work) {
 			this.work = work;
 		}
+		
+		@Override
+		protected void onPreExecute() {
+			work.onPreExecute();
+		}
 
 		@Override
 		protected Result doInBackground(Parameter... parameters) {

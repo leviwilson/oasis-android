@@ -2,6 +2,8 @@ package com.oasisgranger;
 
 import static com.oasisgranger.helpers.ViewHelper.findFor;
 
+import java.util.ArrayList;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +17,8 @@ import android.widget.ListView;
 import com.google.inject.Inject;
 import com.oasisgranger.R.layout;
 import com.oasisgranger.models.Podcast;
+import com.oasisgranger.task.AsyncWorkWithCallback;
+import com.oasisgranger.task.AsyncWorkWithCallback.Callback;
 import com.oasisgranger.task.TaskRunner;
 
 public class PodcastsActivity extends OasisActivity {
@@ -34,7 +38,7 @@ public class PodcastsActivity extends OasisActivity {
 
 		listView = findFor(this, R.id.podcast_list);
 		listView.setOnItemClickListener(new OnPodcastClick());
-		
+
 		loadPodcasts();
 	}
 
@@ -56,20 +60,48 @@ public class PodcastsActivity extends OasisActivity {
 	}
 
 	private void loadPodcasts() {
-		final DialogInterface progressDialog = dialogFacade.showProgressFor(this, "Loading...");
-		taskRunner.run(new LoadPodcastsWorkItem(this, progressDialog));
+		taskRunner.run(new LoadPodcastsWork(new PodcastsLoadedCallback()));
+	}
+
+	private final class LoadPodcastsWork extends AsyncWorkWithCallback<Void, ArrayList<Podcast>> {
+		private LoadPodcastsWork(Callback<ArrayList<Podcast>> callback) {
+			super(callback);
+		}
+
+		@Override
+		public ArrayList<Podcast> doInBackground(Void... parameters) {
+			return PodcastsActivity.this.oasisPodcasts.load();
+		}
+	}
+
+	private final class PodcastsLoadedCallback implements Callback<ArrayList<Podcast>> {
+		private DialogInterface progressDialog;
+
+		@Override
+		public void onPreExecute() {
+			progressDialog = dialogFacade.showProgressFor(PodcastsActivity.this, "Loading...");
+		}
+
+		@Override
+		public void onPostExecute(ArrayList<Podcast> result) {
+			PodcastAdapter adapter = new PodcastAdapter(getApplicationContext(), layout.podcast_item, result);
+			listView.setAdapter(adapter);
+			progressDialog.dismiss();
+		}
 	}
 
 	private final class OnPodcastClick implements OnItemClickListener {
-		
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			Intent intent = new Intent(getApplicationContext(), PodcastDetails.class);
+
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			Intent intent = new Intent(getApplicationContext(),
+					PodcastDetails.class);
 			intent.putExtra(Podcast.class.getName(), podcastAt(position));
 			startActivity(intent);
 		}
 
 		private Podcast podcastAt(int position) {
-			return (Podcast)listView.getItemAtPosition(position);
+			return (Podcast) listView.getItemAtPosition(position);
 		}
 	}
 
