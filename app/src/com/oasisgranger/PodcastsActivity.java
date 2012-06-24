@@ -1,5 +1,6 @@
 package com.oasisgranger;
 
+import static com.oasisgranger.helpers.ViewHelper.findFor;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,38 +13,27 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.google.inject.Inject;
-import com.oasisgranger.helpers.ViewHelper;
+import com.oasisgranger.R.layout;
 import com.oasisgranger.models.Podcast;
 import com.oasisgranger.task.TaskRunner;
 
 public class PodcastsActivity extends OasisActivity {
 
 	@Inject OasisPodcasts oasisPodcasts;
-
-	@Inject
-	private DialogFacade dialogFacade;
-
-	@Inject
-	TaskRunner taskRunner;
+	@Inject DialogFacade dialogFacade;
+	@Inject TaskRunner taskRunner;
 
 	ListView listView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_podcasts);
+		setContentView(layout.activity_podcasts);
 
 		setTitle("Podcasts");
 
-		listView = ViewHelper.findFor(this, R.id.podcast_list);
-		listView.setOnItemClickListener(new OnItemClickListener() {
-			
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Intent intent = new Intent(getApplicationContext(), PodcastDetails.class);
-				intent.putExtra(Podcast.class.getName(), (Podcast)listView.getItemAtPosition(position));
-				startActivity(intent);
-			}
-		});
+		listView = findFor(this, R.id.podcast_list);
+		listView.setOnItemClickListener(new OnPodcastClick());
 		
 		loadPodcasts();
 	}
@@ -66,9 +56,21 @@ public class PodcastsActivity extends OasisActivity {
 	}
 
 	private void loadPodcasts() {
-		final DialogInterface progressDialog = dialogFacade.showProgressFor(
-				this, "Loading...");
+		final DialogInterface progressDialog = dialogFacade.showProgressFor(this, "Loading...");
 		taskRunner.run(new LoadPodcastsWorkItem(this, progressDialog));
+	}
+
+	private final class OnPodcastClick implements OnItemClickListener {
+		
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			Intent intent = new Intent(getApplicationContext(), PodcastDetails.class);
+			intent.putExtra(Podcast.class.getName(), podcastAt(position));
+			startActivity(intent);
+		}
+
+		private Podcast podcastAt(int position) {
+			return (Podcast)listView.getItemAtPosition(position);
+		}
 	}
 
 }
