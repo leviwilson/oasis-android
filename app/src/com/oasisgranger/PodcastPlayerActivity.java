@@ -2,6 +2,7 @@ package com.oasisgranger;
 
 import static com.oasisgranger.helpers.ViewHelper.enable;
 import static com.oasisgranger.helpers.ViewHelper.findFor;
+import static com.oasisgranger.helpers.ViewHelper.setTextFor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,7 +12,6 @@ import android.widget.Chronometer;
 import com.google.inject.Inject;
 import com.oasisgranger.R.id;
 import com.oasisgranger.R.layout;
-import com.oasisgranger.helpers.ViewHelper;
 import com.oasisgranger.media.OnInitialPlaybackListener;
 import com.oasisgranger.media.OnPlayerConnectedListener;
 import com.oasisgranger.media.PlayerBinding;
@@ -64,7 +64,9 @@ public class PodcastPlayerActivity extends OasisActivity {
 	}
 
 	private void updatePlayState() {
-		if (getPlayer().isPlaying()) {
+	final PlayerBinding player = getPlayer();
+		
+		if (player.isPlaying()) {
 			playPauseButton.setText("Pause");
 			startTimer();
 		} else {
@@ -72,7 +74,7 @@ public class PodcastPlayerActivity extends OasisActivity {
 			stopTimer();
 		}
 		
-		ViewHelper.setTextFor(this, id.total_time, getPlayer().formatTotalTime("HH:mm:ss"));
+		setTotalTime(player);
 	}
 
 	private void startTimer() {
@@ -82,6 +84,10 @@ public class PodcastPlayerActivity extends OasisActivity {
 
 	private void stopTimer() {
 		chronometer.stop();
+	}
+
+	private void setTotalTime(final PlayerBinding player) {
+		setTextFor(this, id.total_time, player.formatTotalTime("HH:mm:ss"));
 	}
 
 	private final class OnPlayerConnected extends OnPlayerConnectedListener {

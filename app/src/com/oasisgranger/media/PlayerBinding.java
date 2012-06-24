@@ -13,8 +13,7 @@ import android.os.SystemClock;
 
 import com.oasisgranger.PodcastService;
 
-public class PlayerBinding extends Binder implements OnPreparedListener,
-		OnAudioFocusChangeListener {
+public class PlayerBinding extends Binder implements OnPreparedListener, OnAudioFocusChangeListener {
 
 	private final MediaPlayer mediaPlayer;
 	private final PodcastService service;
@@ -73,8 +72,7 @@ public class PlayerBinding extends Binder implements OnPreparedListener,
 		signalOnInitialPlayback();
 	}
 
-	public void setOnInitialPlaybackListener(
-			final OnInitialPlaybackListener listener) {
+	public void setOnInitialPlaybackListener(final OnInitialPlaybackListener listener) {
 		onInitialPlayback = listener;
 
 		if (isPrepared) {

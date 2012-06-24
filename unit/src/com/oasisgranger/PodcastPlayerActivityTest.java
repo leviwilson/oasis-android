@@ -199,12 +199,12 @@ public class PodcastPlayerActivityTest {
 	public void itStartsElapsingAgainWhenResuming() {
 		startActivity();
 		playbackHasStarted();
-		appearAsPaused();
-		elapsedChronometer().reset();
 		
-		clickOn(activity, id.play_or_pause);
+		clickOn(activity, id.play_or_pause); // play
+		clickOn(activity, id.play_or_pause); // pause
+		clickOn(activity, id.play_or_pause); // play again
 		
-		assertThat(elapsedChronometer().wasStarted(), is(true));
+		assertThat(elapsedChronometer().wasRestarted(), is(true));
 	}
 
 	private void startActivity() {
@@ -250,8 +250,8 @@ public class PodcastPlayerActivityTest {
 
 	private ShadowChronometer elapsedChronometer() {
 		final Chronometer elapsedTimer = findFor(activity, id.elapsed_time);
-		ShadowChronometer shadowOf = shadowOf_(elapsedTimer);
-		return shadowOf;
+		ShadowChronometer shadowChronometer = shadowOf_(elapsedTimer);
+		return shadowChronometer;
 	}
 	
 	private class PlayerBindingStub extends PlayerBinding {
