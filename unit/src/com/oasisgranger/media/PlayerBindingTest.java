@@ -131,6 +131,14 @@ public class PlayerBindingTest {
 	}
 	
 	@Test
+	public void itGetsTheElapsedRealTime() {
+		when(mediaPlayer.getCurrentPosition()).thenReturn(120);
+		
+		// SystemClock.elapsedRealtime() returns 0 with Robolectric
+		assertThat(playerBinding.getElapsedRealTime(), is(-120L));
+	}
+	
+	@Test
 	public void itCanFormatTheTotalTime() {
 		final int hourMillis = (int) TimeUnit.HOURS.toMillis(2);
 		final int minuteMillis = (int) TimeUnit.MINUTES.toMillis(42);
