@@ -9,7 +9,9 @@ public class DialogFactory implements DialogFacade {
 
 	@Override
 	public ProgressDialog createProgress(Activity activity, String message) {
-		return ProgressDialog.show(activity, "", message);
+		final ProgressDialog progressDialog = new ProgressDialog(activity);
+		progressDialog.setMessage(message);
+		return progressDialog;
 	}
 
 	@SuppressWarnings("deprecation")
