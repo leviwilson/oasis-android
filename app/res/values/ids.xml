@@ -22,5 +22,6 @@
     <item name="actionbar_compat_item_refresh" type="id"/>
     <item name="menu_refresh" type="id"/>
     <item name="background_podcast" type="id"/>
+    <item name="progress_loading" type="id"/>
 
 </resources>

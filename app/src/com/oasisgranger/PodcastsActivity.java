@@ -4,7 +4,7 @@ import static com.oasisgranger.helpers.ViewHelper.findFor;
 
 import java.util.ArrayList;
 
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +15,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.google.inject.Inject;
+import com.oasisgranger.R.id;
 import com.oasisgranger.R.layout;
 import com.oasisgranger.models.Podcast;
 import com.oasisgranger.task.AsyncWorkWithCallback;
@@ -26,8 +27,9 @@ public class PodcastsActivity extends OasisActivity {
 	@Inject OasisPodcasts oasisPodcasts;
 	@Inject DialogFacade dialogFacade;
 	@Inject TaskRunner taskRunner;
-
+	
 	ListView listView;
+	LoadPodcastsWork podcastsWork;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +41,27 @@ public class PodcastsActivity extends OasisActivity {
 		listView = findFor(this, R.id.podcast_list);
 		listView.setOnItemClickListener(new OnPodcastClick());
 
-		loadPodcasts();
+		podcastsWork = getPodcastsWorkItem();
+		if (null == podcastsWork) {
+			loadPodcasts();
+		}
+	}
+	
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		return dialogFacade.createProgress(this, "Loading...");
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.podcasts_menu, menu);
 		return true;
+	}
+	
+	@Override
+	public Object onRetainNonConfigurationInstance() {
+		podcastsWork.detach();
+		return podcastsWork;
 	}
 
 	@Override
@@ -59,8 +75,19 @@ public class PodcastsActivity extends OasisActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	@SuppressWarnings("deprecation")
+	private LoadPodcastsWork getPodcastsWorkItem() {
+		LoadPodcastsWork workItem = (LoadPodcastsWork) getLastNonConfigurationInstance();
+		if( null != podcastsWork ) {
+			workItem.attach(new PodcastsLoadedCallback());
+		}
+		
+		return workItem;
+	}
+
 	private void loadPodcasts() {
-		taskRunner.run(new LoadPodcastsWork(new PodcastsLoadedCallback()));
+		dialogFacade.show(this, id.progress_loading);
+		taskRunner.run(podcastsWork = new LoadPodcastsWork(new PodcastsLoadedCallback()));
 	}
 
 	private final class LoadPodcastsWork extends AsyncWorkWithCallback<Void, ArrayList<Podcast>> {
@@ -75,27 +102,23 @@ public class PodcastsActivity extends OasisActivity {
 	}
 
 	private final class PodcastsLoadedCallback implements Callback<ArrayList<Podcast>> {
-		private DialogInterface progressDialog;
-
+		
 		@Override
 		public void onPreExecute() {
-			progressDialog = dialogFacade.showProgressFor(PodcastsActivity.this, "Loading...");
 		}
 
 		@Override
 		public void onPostExecute(ArrayList<Podcast> result) {
 			PodcastAdapter adapter = new PodcastAdapter(getApplicationContext(), layout.podcast_item, result);
 			listView.setAdapter(adapter);
-			progressDialog.dismiss();
+			dialogFacade.dismiss(PodcastsActivity.this, id.progress_loading);
 		}
 	}
 
 	private final class OnPodcastClick implements OnItemClickListener {
 
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
-			Intent intent = new Intent(getApplicationContext(),
-					PodcastDetails.class);
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			Intent intent = new Intent(getApplicationContext(), PodcastDetails.class);
 			intent.putExtra(Podcast.class.getName(), podcastAt(position));
 			startActivity(intent);
 		}

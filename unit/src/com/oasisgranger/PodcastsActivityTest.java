@@ -51,7 +51,13 @@ public class PodcastsActivityTest {
 	@Test
 	public void itShowsProgressWhenLoading() {
 		startActivity();
-		verify(dialogFacade).showProgressFor(activity, "Loading...");
+		verify(dialogFacade).createProgress(activity, "Loading...");
+	}
+	
+	@Test
+	public void itDismissesTheDialogWhenDone() {
+		startActivity();
+		verify(dialogFacade).dismiss(activity, id.progress_loading);
 	}
 
 	@Test
