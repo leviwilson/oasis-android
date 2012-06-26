@@ -54,7 +54,6 @@ public class PodcastsActivity extends OasisActivity {
 		return podcastData;
 	}
 	
-	@SuppressWarnings("deprecation")
 	private PodcastData getLastPodcastData() {
 		PodcastData lastPodcastData = (PodcastData) getLastNonConfigurationInstance();
 		if( null == lastPodcastData ) {
