@@ -9,8 +9,8 @@ before_install:
   - export ANDROID_HOME=~/builds/leviwilson/oasis-android/android-sdk-linux
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
   - android update sdk --filter 1,2,4,9 --no-ui --force
-  - android update project --path ./app
-  - android update project --path ./integration
+  - android update project -t 1 -p ./app
+  - android update project -t 1 -p ./integration
   - echo no | android create avd -n android-10 -t 1
   - emulator -avd android-10 -no-window -no-audio &
   - sh wait_for_emulator.sh
