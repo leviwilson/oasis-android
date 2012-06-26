@@ -87,7 +87,7 @@ public class PodcastPlayerActivity extends OasisActivity {
 	}
 
 	private void setTotalTime(final PlayerBinding player) {
-		setTextFor(this, id.total_time, player.formatTotalTime("HH:mm:ss"));
+		setTextFor(this, id.total_time, player.formatTotalTime(" / HH:mm:ss"));
 	}
 
 	private final class OnPlayerConnected extends OnPlayerConnectedListener {

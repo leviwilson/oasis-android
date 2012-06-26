@@ -155,10 +155,10 @@ public class PodcastPlayerActivityTest {
 	}
 	
 	@Test
-	public void itFormatsTheTotalTimeInHHmmss() {
+	public void itFormatsTheTotalTimeInHHmmssWithASlashToSeparateTheElapsedTimeToo() {
 		startActivity();
 		playbackHasStarted();
-		verify(player).formatTotalTime("HH:mm:ss");
+		verify(player).formatTotalTime(" / HH:mm:ss");
 	}
 	
 	@Test
@@ -205,6 +205,10 @@ public class PodcastPlayerActivityTest {
 		clickOn(activity, id.play_or_pause); // play again
 		
 		assertThat(elapsedChronometer().wasRestarted(), is(true));
+	}
+	
+	@Test
+	public void blar() {
 	}
 
 	private void startActivity() {
