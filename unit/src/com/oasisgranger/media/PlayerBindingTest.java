@@ -15,6 +15,7 @@ import org.mockito.Mock;
 
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnBufferingUpdateListener;
 
 import com.oasisgranger.PodcastService;
 import com.oasisgranger.test.OasisTestRunner;
@@ -149,6 +150,18 @@ public class PlayerBindingTest {
 		assertThat(playerBinding.formatTotalTime("HH:mm:ss"), is("02:42:07"));
 	}
 	
+	@Test
+	public void itCanLetOthersKnowAboutBuffering() {
+		OnBufferingUpdateListener testListener = new OnBufferingUpdateListener() {
+			public void onBufferingUpdate(MediaPlayer mediaPlayer, int percent) {
+			}
+		};
+		
+		playerBinding.setOnBufferingListener(testListener);
+		
+		verify(mediaPlayer).setOnBufferingUpdateListener(testListener);
+	}
+
 	private final class TestOnInitialPlayback extends OnInitialPlaybackListener {
 
 		private PlayerBinding player;

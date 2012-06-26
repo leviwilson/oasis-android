@@ -7,6 +7,7 @@ import java.util.TimeZone;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Binder;
 import android.os.SystemClock;
@@ -105,6 +106,10 @@ public class PlayerBinding extends Binder implements OnPreparedListener, OnAudio
 			mediaPlayer.setVolume(0.1f, 0.1f);
 			break;
 		}
+	}
+
+	public void setOnBufferingListener(final OnBufferingUpdateListener listener) {
+		mediaPlayer.setOnBufferingUpdateListener(listener);
 	}
 
 }
