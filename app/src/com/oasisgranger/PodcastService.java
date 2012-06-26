@@ -41,6 +41,7 @@ public class PodcastService extends OasisService {
 		return mediaPlayer;
 	}
 
+	@SuppressWarnings("deprecation")
 	private Notification buildNotificationFor(final Podcast podcast) {
 		final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, sendTo(PodcastPlayerActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
 		

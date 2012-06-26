@@ -90,6 +90,7 @@ public class ActionBarHelperBase extends ActionBarHelper {
 			return;
 		}
 
+		@SuppressWarnings("deprecation")
 		LinearLayout.LayoutParams springLayoutParams = new LinearLayout.LayoutParams(
 				0, ViewGroup.LayoutParams.FILL_PARENT);
 		springLayoutParams.weight = 1;
@@ -176,6 +177,7 @@ public class ActionBarHelperBase extends ActionBarHelper {
 	 * {@link com.example.android.actionbarcompat.ActionBarHelperBase#setRefreshActionItemState(boolean)}
 	 * .
 	 */
+	@SuppressWarnings("deprecation")
 	private View addActionItemCompatFromMenuItem(final MenuItem item) {
 		final int itemId = item.getItemId();
 
