@@ -11,9 +11,9 @@ before_install:
   - android list sdk
   - android update sdk --filter 1,2,4,9,10,25 --no-ui --force
   - android list target
-  - android update project -t 2 -p ./app
-  - android update project -t 2 -p ./integration
-  - echo no | android create avd -n android-10 -t 1
+  - android update project -t 4 -p ./app
+  - android update project -t 4 -p ./integration
+  - echo no | android create avd -n android-10 -t 2
   - emulator -avd android-10 -no-window -no-audio &
   - sh wait_for_emulator.sh
 after_install:
