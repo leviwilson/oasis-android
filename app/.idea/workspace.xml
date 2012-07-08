@@ -1,45 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayoutPreviewToolWindow">
+    <option name="state">
+      <GlobalState>
+        <option name="device" value="2.7in QVGA" />
+        <option name="dockMode" value="" />
+        <option name="nightMode" value="notnight" />
+        <option name="targetHashString" value="android-15" />
+        <option name="theme" value="OasisTheme" />
+      </GlobalState>
+    </option>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="9521e5bd-97cc-4424-9d64-82b8546c5e4a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/res-cache/oasis_app/drawable-hdpi/actionbar_shadow.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/res-cache/oasis_app/drawable-hdpi/home_btn_podcast.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/res-cache/oasis_app/drawable-hdpi/home_btn_podcast_pressed.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/res-cache/oasis_app/drawable-hdpi/ic_calendar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/res-cache/oasis_app/drawable-hdpi/ic_home.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/res-cache/oasis_app/drawable-hdpi/ic_information.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/res-cache/oasis_app/drawable-hdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/res-cache/oasis_app/drawable-hdpi/ic_refresh.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/res-cache/oasis_app/drawable-hdpi/ic_share.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/res-cache/oasis_app/drawable-ldpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/res-cache/oasis_app/drawable-mdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/res-cache/oasis_integration/drawable-hdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/res-cache/oasis_integration/drawable-ldpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/res-cache/oasis_integration/drawable-mdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/res-cache/oasis_integration/drawable-xhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/leviwilson.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/oasis_app.eml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/oasis_app.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../integration/oasis_integration.eml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../integration/oasis_integration.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../unit/oasis_unit.eml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../unit/oasis_unit.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.classpath" afterPath="$PROJECT_DIR$/.classpath" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.properties" afterPath="$PROJECT_DIR$/project.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/oasisgranger/PodcastsActivity.java" afterPath="$PROJECT_DIR$/src/com/oasisgranger/PodcastsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../integration/.classpath" afterPath="$PROJECT_DIR$/../integration/.classpath" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../integration/project.properties" afterPath="$PROJECT_DIR$/../integration/project.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_podcast_player.xml" afterPath="$PROJECT_DIR$/res/layout/activity_podcast_player.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/oasisgranger/PodcastPlayerActivity.java" afterPath="$PROJECT_DIR$/src/com/oasisgranger/PodcastPlayerActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../unit/src/com/oasisgranger/PodcastPlayerActivityTest.java" afterPath="$PROJECT_DIR$/../unit/src/com/oasisgranger/PodcastPlayerActivityTest.java" />
     </list>
     <ignored path="app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -96,17 +75,43 @@
     <favorites_list name="app" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="PodcastsActivity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/oasisgranger/PodcastsActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="4" selection-start="1889" selection-end="1889" vertical-scroll-proportion="0.36689037">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.6452304">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="activity_podcast_player.xml" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/res/layout/activity_podcast_player.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="4" column="23" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="PodcastPlayerActivityTest.java" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/../unit/src/com/oasisgranger/PodcastPlayerActivityTest.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="160" column="40" selection-start="4155" selection-end="4155" vertical-scroll-proportion="0.6183908">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="PodcastPlayerActivity.java" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/com/oasisgranger/PodcastPlayerActivity.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="91" column="0" selection-start="2328" selection-end="2328" vertical-scroll-proportion="0.44827586">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -121,6 +126,10 @@
       <list>
         <option value="$PROJECT_DIR$/../integration/src/com/oasisgranger/OasisPodcastsTest.java" />
         <option value="$PROJECT_DIR$/src/com/oasisgranger/PodcastsActivity.java" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/src/com/oasisgranger/PodcastPlayerActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/activity_podcast_player.xml" />
+        <option value="$PROJECT_DIR$/../unit/src/com/oasisgranger/PodcastPlayerActivityTest.java" />
       </list>
     </option>
   </component>
@@ -146,7 +155,19 @@
             <id>CorrectnessLintAndroid</id>
           </State>
           <State>
+            <id>GPath inspectionsGroovy</id>
+          </State>
+          <State>
+            <id>General</id>
+          </State>
+          <State>
+            <id>Groovy</id>
+          </State>
+          <State>
             <id>IconsUsabilityLintAndroid</id>
+          </State>
+          <State>
+            <id>Internationalization issues</id>
           </State>
           <State>
             <id>InternationalizationLintAndroid</id>
@@ -158,7 +179,16 @@
             <id>MessagesCorrectnessLintAndroid</id>
           </State>
           <State>
+            <id>Performance issues</id>
+          </State>
+          <State>
             <id>PerformanceLintAndroid</id>
+          </State>
+          <State>
+            <id>Probable bugs</id>
+          </State>
+          <State>
+            <id>Properties Files</id>
           </State>
           <State>
             <id>SecurityLintAndroid</id>
@@ -246,6 +276,7 @@
     <property name="options.lastSelected" value="preferences.keymap" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Rockin" />
@@ -256,7 +287,29 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
   </component>
-  <component name="RunManager" selected="Android Tests.Integration">
+  <component name="RunManager" selected="JUnit.PodcastPlayerActivityTest">
+    <configuration default="false" name="PodcastPlayerActivityTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="oasis_unit" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.oasisgranger" />
+      <option name="MAIN_CLASS_NAME" value="com.oasisgranger.PodcastPlayerActivityTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -449,7 +502,7 @@
       <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
       <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="PREFERRED_AVD" value="Android-2.3" />
+      <option name="PREFERRED_AVD" value="Rockin" />
       <option name="COMMAND_LINE" value="" />
       <option name="WIPE_USER_DATA" value="false" />
       <option name="DISABLE_BOOT_ANIMATION" value="true" />
@@ -504,10 +557,11 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Android Application.Run Application" />
       <item index="1" class="java.lang.String" itemvalue="Android Tests.Integration" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.All Tests" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.PodcastPlayerActivityTest" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -545,8 +599,9 @@
     <frame x="0" y="22" width="1440" height="834" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32959327" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.66619915" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -559,8 +614,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18893678" sideWeight="0.66479665" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33520338" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18893678" sideWeight="0.67040676" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33380085" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -655,7 +710,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/oasisgranger/PodcastsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="4" selection-start="1889" selection-end="1889" vertical-scroll-proportion="0.36689037">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="36" selection-start="630" selection-end="630" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/oasisgranger/PodcastPlayerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="0" selection-start="2328" selection-end="2328" vertical-scroll-proportion="0.44827586">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_podcast_player.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="23" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../unit/src/com/oasisgranger/PodcastPlayerActivityTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="160" column="40" selection-start="4155" selection-end="4155" vertical-scroll-proportion="0.6183908">
           <folding />
         </state>
       </provider>
@@ -712,7 +795,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>oasis_integration</last-edited>
+          <last-edited>oasis_app</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
