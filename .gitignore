@@ -18,3 +18,4 @@ coverage.em
 app/junit*.properties
 cukes/results
 Test.apk
+workspace.xml
