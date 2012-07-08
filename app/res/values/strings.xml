@@ -11,6 +11,6 @@
     <string name="play">Play</string>
     <string name="podcast_notification_title">Oasis Granger Podcast</string>
     <string name="pause">Pause</string>
-    <string name="blank_total_time"> / 00:00:00</string>
+    <string name="blank_total_time">00:00:00</string>
 
 </resources>

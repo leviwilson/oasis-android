@@ -79,7 +79,7 @@ public class PodcastPlayerActivityTest {
 	}
 	
 	@Test
-	public void itInitiallyPlaysThePodast() {
+	public void itInitiallyPlaysThePodcast() {
 		startActivity();
 		verify(serviceConnector).connectWith(podcast);
 	}
@@ -155,10 +155,10 @@ public class PodcastPlayerActivityTest {
 	}
 	
 	@Test
-	public void itFormatsTheTotalTimeInHHmmssWithASlashToSeparateTheElapsedTimeToo() {
+	public void itFormatsTheTotalTimeInHoursMinutesAndSeconds() {
 		startActivity();
 		playbackHasStarted();
-		verify(player).formatTotalTime(" / HH:mm:ss");
+		verify(player).formatTotalTime("HH:mm:ss");
 	}
 	
 	@Test
