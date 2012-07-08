@@ -43,12 +43,14 @@ public class PodcastsActivity extends OasisActivity {
 		loadPodcasts();
 	}
 
-	@Override
+	@SuppressWarnings("deprecation")
+    @Override
 	protected Dialog onCreateDialog(int id) {
 		return dialogFacade.createProgress(this, "Loading...");
 	}
 	
-	@Override
+	@SuppressWarnings("deprecation")
+    @Override
 	public Object onRetainNonConfigurationInstance() {
 		podcastData.getPodcastsWork().detach();
 		return podcastData;

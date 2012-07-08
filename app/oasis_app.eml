@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="guice-3.0-no_aop.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/guice-3.0-no_aop.jar!/"/>
+	</lib>
+	<lib name="gson-2.0.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/gson-2.0.jar!/"/>
+	</lib>
+	<lib name="android-support-v4.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/android-support-v4.jar!/"/>
+	</lib>
+	<lib name="javax.inject.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/javax.inject.jar!/"/>
+	</lib>
+	<lib name="FlurryAgent.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libs/FlurryAgent.jar!/"/>
+	</lib>
+</component>

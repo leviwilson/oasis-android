@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="robolectric-1.2-jar-with-dependencies.jar" scope="COMPILE">
+		<srcroot url="jar://$MODULE_DIR$/libs/robolectric-1.2-sources.jar!/"/>
+		<relative-module-src project-related="jar://$PROJECT_DIR$/../unit/libs/robolectric-1.2-sources.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../unit/libs/robolectric-1.2-jar-with-dependencies.jar!/"/>
+	</lib>
+	<lib name="mockito-all-1.9.0.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../unit/libs/mockito-all-1.9.0.jar!/"/>
+	</lib>
+	<lib name="android.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../unit/libs/android.jar!/"/>
+	</lib>
+	<lib name="maps.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/../unit/libs/maps.jar!/"/>
+	</lib>
+</component>
