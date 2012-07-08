@@ -149,7 +149,13 @@ public class PlayerBindingTest {
 		
 		assertThat(playerBinding.formatTotalTime("HH:mm:ss"), is("02:42:07"));
 	}
-	
+
+    @Test
+    public void itCanReturnTheTotalTime() {
+        playerBinding.getTotalTime();
+        verify(mediaPlayer).getDuration();
+    }
+
 	@Test
 	public void itCanLetOthersKnowAboutBuffering() {
 		OnBufferingUpdateListener testListener = new OnBufferingUpdateListener() {
