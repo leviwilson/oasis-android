@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Chronometer;
 
+import android.widget.SeekBar;
 import com.google.inject.Inject;
 import com.oasisgranger.R.id;
 import com.oasisgranger.R.layout;
@@ -64,7 +65,7 @@ public class PodcastPlayerActivity extends OasisActivity {
 	}
 
 	private void updatePlayState() {
-	final PlayerBinding player = getPlayer();
+        final PlayerBinding player = getPlayer();
 		
 		if (player.isPlaying()) {
 			playPauseButton.setText("Pause");
@@ -88,6 +89,8 @@ public class PodcastPlayerActivity extends OasisActivity {
 
 	private void setTotalTime(final PlayerBinding player) {
 		setTextFor(this, id.total_time, player.formatTotalTime("HH:mm:ss"));
+        final SeekBar seekBar = findFor(this, id.elapsed_time_seek);
+        seekBar.setMax(player.getTotalTime());
 	}
 
 	private final class OnPlayerConnected extends OnPlayerConnectedListener {

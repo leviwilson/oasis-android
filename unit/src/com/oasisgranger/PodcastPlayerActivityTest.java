@@ -15,6 +15,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.concurrent.TimeUnit;
 
+import android.widget.SeekBar;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -147,12 +148,23 @@ public class PodcastPlayerActivityTest {
 
 	@Test
 	public void itDisplaysTheTotalPodcastTime() {
-		player.setTotalTimeString("01:03:23");
+		player.setFormattedTotalTime("01:03:23");
 		startActivity();
 		playbackHasStarted();
 
 		assertThat(textOf(activity, id.total_time), is("01:03:23"));
 	}
+
+    @Test
+    public void theSeekBarCanAtMaxBeSetToTheTotalTime() {
+        int totalTimeMillis = 123456;
+        player.setTotalTimeMillis(totalTimeMillis);
+        startActivity();
+        playbackHasStarted();
+
+        final SeekBar seekBar = findFor(activity, id.elapsed_time_seek);
+        assertThat(seekBar.getMax(), is(totalTimeMillis));
+    }
 
 	@Test
 	public void itFormatsTheTotalTimeInHoursMinutesAndSeconds() {
@@ -256,16 +268,21 @@ public class PodcastPlayerActivityTest {
 	private class PlayerBindingStub extends PlayerBinding {
 		private boolean isPlaying;
 		private long elapsedTimeMillis;
-		private String totalTime;
+		private String formattedTotalTime;
+        private int totalTimeMillis;
 
-		@Override
+        @Override
 		public boolean isPlaying() {
 			return isPlaying;
 		}
 
-		public void setTotalTimeString(String totalTime) {
-			this.totalTime = totalTime;
+		public void setFormattedTotalTime(String totalTime) {
+			this.formattedTotalTime = totalTime;
 		}
+
+        public void setTotalTimeMillis(int totalTimeMillis) {
+            this.totalTimeMillis = totalTimeMillis;
+        }
 
 		public void setElapsedRealTime(long elapsedTimeMillis) {
 			this.elapsedTimeMillis = elapsedTimeMillis;
@@ -291,10 +308,15 @@ public class PodcastPlayerActivityTest {
 			return elapsedTimeMillis;
 		}
 
+        @Override
+        public int getTotalTime() {
+            return totalTimeMillis;
+        }
+
 		@Override
 		public String formatTotalTime(final String formatString) {
-			return totalTime;
+			return formattedTotalTime;
 		}
-	}
+    }
 
 }

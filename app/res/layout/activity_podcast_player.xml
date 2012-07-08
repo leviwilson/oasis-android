@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"/>
 
         <SeekBar
-            android:id="@+id/time_seek"
+            android:id="@+id/elapsed_time_seek"
             android:layout_below="@+id/elapsed_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

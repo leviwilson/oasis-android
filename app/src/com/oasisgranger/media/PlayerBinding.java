@@ -21,7 +21,7 @@ public class PlayerBinding extends Binder implements OnPreparedListener, OnAudio
 	private boolean isPrepared;
 	private OnInitialPlaybackListener onInitialPlayback;
 
-	protected PlayerBinding() {
+    protected PlayerBinding() {
 		mediaPlayer = null;
 		service = null;
 	}
@@ -112,4 +112,7 @@ public class PlayerBinding extends Binder implements OnPreparedListener, OnAudio
 		mediaPlayer.setOnBufferingUpdateListener(listener);
 	}
 
+    public int getTotalTime() {
+        return mediaPlayer.getDuration();
+    }
 }
