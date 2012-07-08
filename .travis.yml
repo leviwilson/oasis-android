@@ -10,9 +10,9 @@ before_install:
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
   - android update sdk --filter 1,4,5,9 --no-ui --force
   - android list targets
-  - android update project -t 4 -p ./app
-  - android update project -t 4 -p ./integration
-  - echo no | android create avd -n android-10 -t 2
+  - android update project -t 3 -p ./app
+  - android update project -t 3 -p ./integration
+  - echo no | android create avd -n android-10 -t 1
   - emulator -avd android-10 -no-window -no-audio &
   - sh wait_for_emulator.sh
 after_install:
