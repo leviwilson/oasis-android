@@ -206,10 +206,6 @@ public class PodcastPlayerActivityTest {
 		
 		assertThat(elapsedChronometer().wasRestarted(), is(true));
 	}
-	
-	@Test
-	public void blar() {
-	}
 
 	private void startActivity() {
 		activity = new PodcastPlayerActivity();
