@@ -8,7 +8,7 @@ before_install:
   - export CALABASH_APP_BASE=~/builds/leviwilson
   - export ANDROID_HOME=~/builds/leviwilson/oasis-android/android-sdk-linux
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
-  - android update sdk --filter 1,28,31,38 --no-ui --force
+  - android update sdk --filter 1,4,5,9,28,31,38 --no-ui --force
   - android list targets
   - android update project -t 4 -p ./app
   - android update project -t 4 -p ./integration
