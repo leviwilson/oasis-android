@@ -38,20 +38,7 @@ public class PodcastPlayerActivity extends OasisActivity {
 
         chronometer = findFor(this, id.elapsed_time);
         final SeekBar seekBar = findFor(this, id.elapsed_time_seek);
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                chronometer.setBase(SystemClock.elapsedRealtime() - i);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
+        seekBar.setOnSeekBarChangeListener(new ChronometerSeekListener());
 
         setupButtons();
     }
@@ -142,6 +129,21 @@ public class PodcastPlayerActivity extends OasisActivity {
             enable(PodcastPlayerActivity.this, id.play_or_pause);
             enable(PodcastPlayerActivity.this, id.stop);
             updatePlayState();
+        }
+    }
+
+    private class ChronometerSeekListener implements SeekBar.OnSeekBarChangeListener {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean wasSetByUser) {
+            chronometer.setBase(SystemClock.elapsedRealtime() - progress);
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
         }
     }
 }

@@ -173,15 +173,9 @@ public class PodcastPlayerActivityTest {
         startActivity();
         playbackHasStarted();
 
-        final SeekBar seekBar = findFor(activity, id.elapsed_time_seek);
-        final SeekBar.OnSeekBarChangeListener listener = shadowOf(seekBar).getOnSeekBarChangeListener();
-        listener.onProgressChanged(seekBar, 112233, true);
+        seekTo(112233);
 
         assertThat(elapsedChronometer().initialElapsed(), is(elapsed(112233L)));
-    }
-
-    private long elapsed(long elapsedTime) {
-        return -1 * elapsedTime;
     }
 
     @Test
@@ -282,6 +276,16 @@ public class PodcastPlayerActivityTest {
     private ShadowChronometer elapsedChronometer() {
         final Chronometer elapsedTimer = findFor(activity, id.elapsed_time);
         return shadowOf_(elapsedTimer);
+    }
+
+    private void seekTo(int position) {
+        final SeekBar seekBar = findFor(activity, id.elapsed_time_seek);
+        final SeekBar.OnSeekBarChangeListener listener = shadowOf(seekBar).getOnSeekBarChangeListener();
+        listener.onProgressChanged(seekBar, position, true);
+    }
+
+    private long elapsed(long elapsedTime) {
+        return -1 * elapsedTime;
     }
 
     private class PlayerBindingStub extends PlayerBinding {
