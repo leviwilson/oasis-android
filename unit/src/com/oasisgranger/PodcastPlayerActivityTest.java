@@ -74,8 +74,7 @@ public class PodcastPlayerActivityTest {
 
     @Test
     public void controlsAreEnabledAfterPlaybackStarts() {
-        startActivity();
-        playbackHasStarted();
+        startAsPlaying();
 
         assertThat(isEnabled(activity, id.play_or_pause), is(true));
         assertThat(isEnabled(activity, id.stop), is(true));
@@ -112,8 +111,7 @@ public class PodcastPlayerActivityTest {
     @Test
     public void pauseIsDisplayedIfPlaying() {
         appearAsPlaying();
-        startActivity();
-        playbackHasStarted();
+        startAsPlaying();
 
         assertThat(textOf(activity, id.play_or_pause), is("Pause"));
     }
@@ -121,8 +119,7 @@ public class PodcastPlayerActivityTest {
     @Test
     public void playIsDisplayedIfNotPlaying() {
         appearAsPaused();
-        startActivity();
-        playbackHasStarted();
+        startAsPlaying();
 
         assertThat(textOf(activity, id.play_or_pause), is("Play"));
     }
@@ -151,8 +148,7 @@ public class PodcastPlayerActivityTest {
     @Test
     public void itDisplaysTheTotalPodcastTime() {
         player.setFormattedTotalTime("01:03:23");
-        startActivity();
-        playbackHasStarted();
+        startAsPlaying();
 
         assertThat(textOf(activity, id.total_time), is("01:03:23"));
     }
@@ -161,8 +157,7 @@ public class PodcastPlayerActivityTest {
     public void theSeekBarCanAtMaxBeSetToTheTotalTime() {
         int totalTimeMillis = 123456;
         player.setTotalTimeMillis(totalTimeMillis);
-        startActivity();
-        playbackHasStarted();
+        startAsPlaying();
 
         final SeekBar seekBar = findFor(activity, id.elapsed_time_seek);
         assertThat(seekBar.getMax(), is(totalTimeMillis));
@@ -170,8 +165,7 @@ public class PodcastPlayerActivityTest {
 
     @Test
     public void itUpdatesTheElapsedTimeWhileSeeking() {
-        startActivity();
-        playbackHasStarted();
+        startAsPlaying();
 
         seekTo(112233);
 
@@ -180,8 +174,7 @@ public class PodcastPlayerActivityTest {
 
     @Test
     public void itSeeksToTheDesiredPosition() {
-        startActivity();
-        playbackHasStarted();
+        startAsPlaying();
 
         seekTo(1234);
 
@@ -190,8 +183,7 @@ public class PodcastPlayerActivityTest {
 
     @Test
     public void itFormatsTheTotalTimeInHoursMinutesAndSeconds() {
-        startActivity();
-        playbackHasStarted();
+        startAsPlaying();
         verify(player).formatTotalTime("HH:mm:ss");
     }
 
@@ -221,8 +213,7 @@ public class PodcastPlayerActivityTest {
 
     @Test
     public void itStopsElapsingWhenPaused() {
-        startActivity();
-        playbackHasStarted();
+        startAsPlaying();
 
         clickOn(activity, id.play_or_pause);
 
@@ -231,8 +222,7 @@ public class PodcastPlayerActivityTest {
 
     @Test
     public void itStartsElapsingAgainWhenResuming() {
-        startActivity();
-        playbackHasStarted();
+        startAsPlaying();
 
         clickOn(activity, id.play_or_pause); // play
         clickOn(activity, id.play_or_pause); // pause
@@ -251,6 +241,11 @@ public class PodcastPlayerActivityTest {
 
         shadowOf(activity).create();
         beConnected();
+    }
+
+    private void startAsPlaying() {
+        startActivity();
+        playbackHasStarted();
     }
 
     private void setupMocks() {
