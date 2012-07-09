@@ -4,6 +4,7 @@ import static com.oasisgranger.helpers.ViewHelper.enable;
 import static com.oasisgranger.helpers.ViewHelper.findFor;
 import static com.oasisgranger.helpers.ViewHelper.setTextFor;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -34,6 +35,22 @@ public class PodcastPlayerActivity extends OasisActivity {
 		setTitle("");
 		
 		chronometer = findFor(this, id.elapsed_time);
+        final SeekBar seekBar = findFor(this, id.elapsed_time_seek);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                chronometer.setBase(SystemClock.elapsedRealtime() - i);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
 		setupButtons();
 	}
 	

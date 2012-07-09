@@ -115,4 +115,7 @@ public class PlayerBinding extends Binder implements OnPreparedListener, OnAudio
     public int getTotalTime() {
         return mediaPlayer.getDuration();
     }
+
+    public void seekTo(int millis) {
+    }
 }

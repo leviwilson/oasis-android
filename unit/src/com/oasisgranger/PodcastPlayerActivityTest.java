@@ -166,7 +166,23 @@ public class PodcastPlayerActivityTest {
         assertThat(seekBar.getMax(), is(totalTimeMillis));
     }
 
-	@Test
+    @Test
+    public void itUpdatesTheElapsedTimeWhileSeeking() {
+        startActivity();
+        playbackHasStarted();
+
+        final SeekBar seekBar = findFor(activity, id.elapsed_time_seek);
+        final SeekBar.OnSeekBarChangeListener listener = shadowOf(seekBar).getOnSeekBarChangeListener();
+        listener.onProgressChanged(seekBar, 112233, true);
+
+        assertThat(elapsedChronometer().initialElapsed(), is(elapsed(112233L)));
+    }
+
+    private long elapsed(long elapsedTime) {
+        return -1 * elapsedTime;
+    }
+
+    @Test
 	public void itFormatsTheTotalTimeInHoursMinutesAndSeconds() {
 		startActivity();
 		playbackHasStarted();
@@ -217,6 +233,7 @@ public class PodcastPlayerActivityTest {
 		clickOn(activity, id.play_or_pause); // play again
 
 		assertThat(elapsedChronometer().wasRestarted(), is(true));
+
 	}
 
 	private void startActivity() {
@@ -276,18 +293,6 @@ public class PodcastPlayerActivityTest {
 			return isPlaying;
 		}
 
-		public void setFormattedTotalTime(String totalTime) {
-			this.formattedTotalTime = totalTime;
-		}
-
-        public void setTotalTimeMillis(int totalTimeMillis) {
-            this.totalTimeMillis = totalTimeMillis;
-        }
-
-		public void setElapsedRealTime(long elapsedTimeMillis) {
-			this.elapsedTimeMillis = elapsedTimeMillis;
-		}
-
 		@Override
 		public void play() {
 			isPlaying = true;
@@ -317,6 +322,21 @@ public class PodcastPlayerActivityTest {
 		public String formatTotalTime(final String formatString) {
 			return formattedTotalTime;
 		}
+
+        @Override
+        public void seekTo(int millis) { }
+
+        public void setFormattedTotalTime(String totalTime) {
+            this.formattedTotalTime = totalTime;
+        }
+
+        public void setTotalTimeMillis(int totalTimeMillis) {
+            this.totalTimeMillis = totalTimeMillis;
+        }
+
+        public void setElapsedRealTime(long elapsedTimeMillis) {
+            this.elapsedTimeMillis = elapsedTimeMillis;
+        }
     }
 
 }
