@@ -3,6 +3,7 @@ package com.oasisgranger;
 import static com.oasisgranger.helpers.ViewHelper.enable;
 import static com.oasisgranger.helpers.ViewHelper.findFor;
 import static com.oasisgranger.helpers.ViewHelper.setTextFor;
+
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -22,19 +23,20 @@ import com.oasisgranger.models.Podcast;
 
 public class PodcastPlayerActivity extends OasisActivity {
 
-	@Inject private PodcastServiceConnector serviceConnection;
-	
-	private Button playPauseButton;
+    @Inject
+    private PodcastServiceConnector serviceConnection;
 
-	private Chronometer chronometer;
+    private Button playPauseButton;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(layout.activity_podcast_player);
-		setTitle("");
-		
-		chronometer = findFor(this, id.elapsed_time);
+    private Chronometer chronometer;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(layout.activity_podcast_player);
+        setTitle("");
+
+        chronometer = findFor(this, id.elapsed_time);
         final SeekBar seekBar = findFor(this, id.elapsed_time_seek);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -51,95 +53,95 @@ public class PodcastPlayerActivity extends OasisActivity {
             }
         });
 
-		setupButtons();
-	}
-	
-	@Override
-	protected void onStart() {
-		serviceConnection.connectWith(thePodcast());
-		super.onStart();
-	}
+        setupButtons();
+    }
 
-	@Override
-	public void onStop() {
-		serviceConnection.disconnect();
-		super.onStop();
-	}
+    @Override
+    protected void onStart() {
+        serviceConnection.connectWith(thePodcast());
+        super.onStart();
+    }
 
-	private Podcast thePodcast() {
-		return getIntent().<Podcast> getParcelableExtra(Podcast.class.getName());
-	}
+    @Override
+    public void onStop() {
+        serviceConnection.disconnect();
+        super.onStop();
+    }
 
-	private PlayerBinding getPlayer() {
-		return serviceConnection.getPlayer();
-	}
+    private Podcast thePodcast() {
+        return getIntent().<Podcast>getParcelableExtra(Podcast.class.getName());
+    }
 
-	private void setupButtons() {
-		playPauseButton = findFor(this, id.play_or_pause);
-		serviceConnection.setOnPlayerConnected(new OnPlayerConnected());
-		
-		findFor(this, id.stop).setOnClickListener(new OnStopListener());
-	}
+    private PlayerBinding getPlayer() {
+        return serviceConnection.getPlayer();
+    }
 
-	private void updatePlayState() {
+    private void setupButtons() {
+        playPauseButton = findFor(this, id.play_or_pause);
+        serviceConnection.setOnPlayerConnected(new OnPlayerConnected());
+
+        findFor(this, id.stop).setOnClickListener(new OnStopListener());
+    }
+
+    private void updatePlayState() {
         final PlayerBinding player = getPlayer();
-		
-		if (player.isPlaying()) {
-			playPauseButton.setText("Pause");
-			startTimer();
-		} else {
-			playPauseButton.setText("Play");
-			stopTimer();
-		}
-		
-		setTotalTime(player);
-	}
 
-	private void startTimer() {
-		chronometer.setBase(getPlayer().getElapsedRealTime());
-		chronometer.start();
-	}
+        if (player.isPlaying()) {
+            playPauseButton.setText("Pause");
+            startTimer();
+        } else {
+            playPauseButton.setText("Play");
+            stopTimer();
+        }
 
-	private void stopTimer() {
-		chronometer.stop();
-	}
+        setTotalTime(player);
+    }
 
-	private void setTotalTime(final PlayerBinding player) {
-		setTextFor(this, id.total_time, player.formatTotalTime("HH:mm:ss"));
+    private void startTimer() {
+        chronometer.setBase(getPlayer().getElapsedRealTime());
+        chronometer.start();
+    }
+
+    private void stopTimer() {
+        chronometer.stop();
+    }
+
+    private void setTotalTime(final PlayerBinding player) {
+        setTextFor(this, id.total_time, player.formatTotalTime("HH:mm:ss"));
         final SeekBar seekBar = findFor(this, id.elapsed_time_seek);
         seekBar.setMax(player.getTotalTime());
-	}
+    }
 
-	private final class OnPlayerConnected extends OnPlayerConnectedListener {
-		@Override
-		public void onConnected(PlayerBinding player) {
-			player.setOnInitialPlaybackListener(new OnPlaybackStarted());
-			playPauseButton.setOnClickListener(new OnPausePlayListener());
-		}
-	}
+    private final class OnPlayerConnected extends OnPlayerConnectedListener {
+        @Override
+        public void onConnected(PlayerBinding player) {
+            player.setOnInitialPlaybackListener(new OnPlaybackStarted());
+            playPauseButton.setOnClickListener(new OnPausePlayListener());
+        }
+    }
 
-	private final class OnStopListener implements OnClickListener {
-		@Override
-		public void onClick(View v) {
-			getPlayer().stop();
-			finish();
-		}
-	}
+    private final class OnStopListener implements OnClickListener {
+        @Override
+        public void onClick(View v) {
+            getPlayer().stop();
+            finish();
+        }
+    }
 
-	private final class OnPausePlayListener implements OnClickListener {
-		@Override
-		public void onClick(View v) {
-			getPlayer().toggleAudio();
-			updatePlayState();
-		}
-	}
-	
-	private final class OnPlaybackStarted extends OnInitialPlaybackListener {
-		@Override
-		public void onInitialPlayback(PlayerBinding player) {
-			enable(PodcastPlayerActivity.this, id.play_or_pause);
-			enable(PodcastPlayerActivity.this, id.stop);
-			updatePlayState();
-		}
-	}
+    private final class OnPausePlayListener implements OnClickListener {
+        @Override
+        public void onClick(View v) {
+            getPlayer().toggleAudio();
+            updatePlayState();
+        }
+    }
+
+    private final class OnPlaybackStarted extends OnInitialPlaybackListener {
+        @Override
+        public void onInitialPlayback(PlayerBinding player) {
+            enable(PodcastPlayerActivity.this, id.play_or_pause);
+            enable(PodcastPlayerActivity.this, id.stop);
+            updatePlayState();
+        }
+    }
 }
