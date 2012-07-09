@@ -133,8 +133,11 @@ public class PodcastPlayerActivity extends OasisActivity {
     }
 
     private class ChronometerSeekListener implements SeekBar.OnSeekBarChangeListener {
+        private int lastProgress;
+
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean wasSetByUser) {
+            lastProgress = progress;
             chronometer.setBase(SystemClock.elapsedRealtime() - progress);
         }
 
@@ -144,6 +147,7 @@ public class PodcastPlayerActivity extends OasisActivity {
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
+            getPlayer().seekTo(lastProgress);
         }
     }
 }

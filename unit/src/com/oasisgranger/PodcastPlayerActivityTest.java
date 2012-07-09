@@ -179,6 +179,16 @@ public class PodcastPlayerActivityTest {
     }
 
     @Test
+    public void itSeeksToTheDesiredPosition() {
+        startActivity();
+        playbackHasStarted();
+
+        seekTo(1234);
+
+        verify(player).seekTo(1234);
+    }
+
+    @Test
     public void itFormatsTheTotalTimeInHoursMinutesAndSeconds() {
         startActivity();
         playbackHasStarted();
@@ -282,6 +292,7 @@ public class PodcastPlayerActivityTest {
         final SeekBar seekBar = findFor(activity, id.elapsed_time_seek);
         final SeekBar.OnSeekBarChangeListener listener = shadowOf(seekBar).getOnSeekBarChangeListener();
         listener.onProgressChanged(seekBar, position, true);
+        listener.onStopTrackingTouch(seekBar);
     }
 
     private long elapsed(long elapsedTime) {
