@@ -156,6 +156,12 @@ public class PlayerBindingTest {
         verify(mediaPlayer).getDuration();
     }
 
+    @Test
+    public void itCanSeek() {
+        playerBinding.seekTo(1234);
+        verify(mediaPlayer).seekTo(1234);
+    }
+
 	@Test
 	public void itCanLetOthersKnowAboutBuffering() {
 		OnBufferingUpdateListener testListener = new OnBufferingUpdateListener() {
