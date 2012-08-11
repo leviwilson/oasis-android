@@ -9,7 +9,7 @@ before_install:
   - export ANDROID_HOME=~/builds/leviwilson/oasis-android/android-sdk-linux
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
   - android update sdk --filter 1,2 --no-ui --force
-  - android update sdk --filter 10,41 --no-ui --force
+  - android update sdk --filter 33,41 --no-ui --force
   - android list targets
   - android update project -t 2 -p ./app
   - android update project -t 2 -p ./integration
