@@ -14,7 +14,7 @@ before_install:
   - android update project -t 2 -p ./app
   - android update project -t 2 -p ./integration
   - echo no | android create avd -n android-10 -t 2
-  - emulator -avd android-10 -no-window -no-audio 1>&2 &
+  - emulator-arm -avd android-10 -no-window -no-audio 1>&2 &
   - sh wait_for_emulator.sh
 after_install:
   - killall emulator-arm
