@@ -3,16 +3,17 @@ jdk:
   - openjdk6
 before_install:
   - gem install calabash-android
-  - wget http://dl.google.com/android/android-sdk_r16-linux.tgz
-  - tar -zxf android-sdk_r16-linux.tgz
+  - wget http://dl.google.com/android/android-sdk_r18-linux.tgz
+  - tar -zxf android-sdk_r18-linux.tgz
   - export CALABASH_APP_BASE=~/builds/leviwilson
   - export ANDROID_HOME=~/builds/leviwilson/oasis-android/android-sdk-linux
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
-  - android update sdk --filter 1,4,5,9,tool,platform-tool --no-ui --force
+  - android update sdk --filter 1,2 --no-ui --force
+  - android update sdk --filter 10,41
   - android list targets
-  - android update project -t 3 -p ./app
-  - android update project -t 3 -p ./integration
-  - echo no | android create avd -n android-10 -t 1
+  - android update project -t 2 -p ./app
+  - android update project -t 2 -p ./integration
+  - echo no | android create avd -n android-10 -t 2
   - emulator -avd android-10 -no-window -no-audio &
   - sh wait_for_emulator.sh
 after_install:
